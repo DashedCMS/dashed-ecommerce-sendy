@@ -2,12 +2,8 @@
 
 namespace Qubiqx\QcommerceEcommerceKeendelivery\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Qubiqx\QcommerceCore\Classes\Sites;
 use Qubiqx\QcommerceCore\Controllers\Frontend\FrontendController;
-use Qubiqx\QcommerceEcommerceExactonline\Classes\Exactonline;
-use Qubiqx\QcommerceEcommerceExactonline\Filament\Pages\Settings\ExactonlineSettingsPage;
 use Qubiqx\QcommerceEcommerceKeendelivery\Classes\KeenDelivery;
 use Qubiqx\QcommerceEcommerceKeendelivery\Models\KeendeliveryOrder;
 
@@ -18,7 +14,7 @@ class KeendeliveryController extends FrontendController
         $keendeliveryOrders = KeendeliveryOrder::where('label_printed', 0)->get();
 
         $response = KeenDelivery::getLabelsFromShipments($keendeliveryOrders->pluck('shipment_id'));
-        if(isset($response['labels'])){
+        if (isset($response['labels'])) {
             $fileName = '/qcommerce/keendelivery/labels/labels-' . time() . '.pdf';
             Storage::put($fileName, base64_decode($response['labels']));
             foreach ($keendeliveryOrders as $keendeliveryOrder) {
@@ -27,7 +23,7 @@ class KeendeliveryController extends FrontendController
             }
 
             return Storage::download($fileName);
-        }else{
+        } else {
             return;
         }
     }

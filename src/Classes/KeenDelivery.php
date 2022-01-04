@@ -2,8 +2,6 @@
 
 namespace Qubiqx\QcommerceEcommerceKeendelivery\Classes;
 
-use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Qubiqx\QcommerceCore\Classes\Sites;
@@ -17,7 +15,7 @@ class KeenDelivery
 {
     public static function isConnected($siteId = null)
     {
-        if (!$siteId) {
+        if (! $siteId) {
             $siteId = Sites::getActive();
         }
 
@@ -32,11 +30,11 @@ class KeenDelivery
 
     public static function syncShippingMethods($siteId = null)
     {
-        if (!$siteId) {
+        if (! $siteId) {
             $siteId = Sites::getActive();
         }
 
-        if (!self::isConnected($siteId)) {
+        if (! self::isConnected($siteId)) {
             return;
         }
 
@@ -58,7 +56,7 @@ class KeenDelivery
                 $shippingMethodService = KeendeliveryShippingMethodService::updateOrCreate(
                     [
                         'keendelivery_shipping_method_id' => $shippingMethod->id,
-                        'value' => $service['value']
+                        'value' => $service['value'],
                     ],
                     [
                         'name' => $service['text'],
@@ -89,7 +87,7 @@ class KeenDelivery
 
         foreach ($shippingMethods as $shippingKey => $shippingMethod) {
             foreach ($shippingMethod['services'] as $serviceKey => $service) {
-                if (!$shippingMethods[$shippingKey]['services'][$serviceKey]['enabled']) {
+                if (! $shippingMethods[$shippingKey]['services'][$serviceKey]['enabled']) {
                     unset($shippingMethods[$shippingKey]['services'][$serviceKey]);
                 }
             }

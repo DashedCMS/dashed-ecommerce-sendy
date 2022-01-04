@@ -11,7 +11,8 @@ use Qubiqx\QcommerceEcommerceKeendelivery\Models\KeendeliveryOrder;
 
 class TrackandTraceMail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     public function __construct(KeendeliveryOrder $keendeliveryOrder)
     {

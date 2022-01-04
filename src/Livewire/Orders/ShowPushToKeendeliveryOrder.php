@@ -69,7 +69,7 @@ class ShowPushToKeendeliveryOrder extends Component implements HasForms
                 ->required()
                 ->reactive()
                 ->options($services->pluck('name', 'value'))
-                ->hidden(fn(\Closure $get) => $get("shipping_method") != $shippingMethod->value);
+                ->hidden(fn (\Closure $get) => $get("shipping_method") != $shippingMethod->value);
 
             foreach ($services as $service) {
                 foreach ($service->keendeliveryShippingMethodServiceOptions as $option) {
@@ -80,28 +80,28 @@ class ShowPushToKeendeliveryOrder extends Component implements HasForms
                                 'max:255',
                             ])
                             ->required($option->mandatory)
-                            ->hidden(fn(\Closure $get) => $get("service") != $service->value);
-                    } else if ($option->type == 'checkbox') {
+                            ->hidden(fn (\Closure $get) => $get("service") != $service->value);
+                    } elseif ($option->type == 'checkbox') {
                         $schema[] = Toggle::make("shipping_method_service_option_{$option->field}")
                             ->label($option->name)
                             ->required($option->mandatory)
-                            ->hidden(fn(\Closure $get) => $get("service") != $service->value);
-                    } else if ($option->type == 'email') {
+                            ->hidden(fn (\Closure $get) => $get("service") != $service->value);
+                    } elseif ($option->type == 'email') {
                         $schema[] = TextInput::make("shipping_method_service_option_{$option->field}")
                             ->type('email')
                             ->label($option->name)
                             ->required($option->mandatory)
                             ->rules([
                                 'max:255',
-                                'email'
+                                'email',
                             ])
-                            ->hidden(fn(\Closure $get) => $get("service") != $service->value);
-                    } else if ($option->type == 'date') {
+                            ->hidden(fn (\Closure $get) => $get("service") != $service->value);
+                    } elseif ($option->type == 'date') {
                         $schema[] = DatePicker::make("shipping_method_service_option_{$option->field}")
                             ->label($option->name)
                             ->required($option->mandatory)
-                            ->hidden(fn(\Closure $get) => $get("service") != $service->value);
-                    } else if ($option->type == 'selectbox') {
+                            ->hidden(fn (\Closure $get) => $get("service") != $service->value);
+                    } elseif ($option->type == 'selectbox') {
                         $choices = [];
                         foreach ($option->choices as $choice) {
                             $choices[$choice['value']] = $choice['text'];
@@ -110,7 +110,7 @@ class ShowPushToKeendeliveryOrder extends Component implements HasForms
                             ->label($option->name)
                             ->options($choices)
                             ->required($option->mandatory)
-                            ->hidden(fn(\Closure $get) => $get("service") != $service->value);
+                            ->hidden(fn (\Closure $get) => $get("service") != $service->value);
                     } else {
                         dump('Contacteer Qubiqx om dit in te bouwen');
                     }
@@ -120,7 +120,7 @@ class ShowPushToKeendeliveryOrder extends Component implements HasForms
 
         return [
             Section::make('Verzenden via KeenDelivery')
-                ->schema($schema)
+                ->schema($schema),
         ];
     }
 
