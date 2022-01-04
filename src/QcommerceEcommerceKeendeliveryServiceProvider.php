@@ -2,24 +2,58 @@
 
 namespace Qubiqx\QcommerceEcommerceKeendelivery;
 
-use Qubiqx\QcommerceEcommerceKeendelivery\Commands\QcommerceEcommerceKeendeliveryCommand;
+use Filament\PluginServiceProvider;
+use Illuminate\Console\Scheduling\Schedule;
+use Qubiqx\QcommerceEcommerceKeendelivery\Filament\Pages\Settings\KeendeliverySettingsPage;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class QcommerceEcommerceKeendeliveryServiceProvider extends PackageServiceProvider
+class QcommerceEcommerceKeendeliveryServiceProvider extends PluginServiceProvider
 {
+    public static string $name = 'qcommerce-ecommerce-keendelivery';
+
+    public function bootingPackage()
+    {
+        $this->app->booted(function () {
+            $schedule = app(Schedule::class);
+//            $schedule->command(SyncOrdersFromChannableCommand::class)->everyFiveMinutes();
+//            $schedule->command(SyncStockFromChannableCommand::class)->everyFiveMinutes();
+        });
+
+//        Order::addDynamicRelation('channableOrder', function (Order $model) {
+//            return $model->hasOne(ChannableOrder::class);
+//        });
+    }
+
     public function configurePackage(Package $package): void
     {
-        /*
-         * This class is a Package Service Provider
-         *
-         * More info: https://github.com/spatie/laravel-package-tools
-         */
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+
+        cms()->builder(
+            'settingPages',
+            array_merge(cms()->builder('settingPages'), [
+                'keendelivery' => [
+                    'name' => 'KeenDelivery',
+                    'description' => 'Koppel KeenDelivery',
+                    'icon' => 'archive',
+                    'page' => KeendeliverySettingsPage::class,
+                ],
+            ])
+        );
+
         $package
-            ->name('qcommerce-ecommerce-keendelivery')
-            ->hasConfigFile()
+            ->name('qcommerce-ecommerce-channable')
             ->hasViews()
-            ->hasMigration('create_qcommerce-ecommerce-keendelivery_table')
-            ->hasCommand(QcommerceEcommerceKeendeliveryCommand::class);
+            ->hasCommands([
+//                SyncOrdersFromChannableCommand::class,
+//                SyncStockFromChannableCommand::class,
+            ]);
+    }
+
+    protected function getPages(): array
+    {
+        return array_merge(parent::getPages(), [
+            KeendeliverySettingsPage::class,
+        ]);
     }
 }
