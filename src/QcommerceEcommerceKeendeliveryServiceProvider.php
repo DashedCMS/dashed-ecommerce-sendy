@@ -6,7 +6,6 @@ use Filament\PluginServiceProvider;
 use Illuminate\Console\Scheduling\Schedule;
 use Qubiqx\QcommerceEcommerceKeendelivery\Filament\Pages\Settings\KeendeliverySettingsPage;
 use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class QcommerceEcommerceKeendeliveryServiceProvider extends PluginServiceProvider
 {
