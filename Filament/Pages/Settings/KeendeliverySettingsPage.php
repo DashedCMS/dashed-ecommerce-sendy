@@ -12,7 +12,6 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Pages\Page;
 use Qubiqx\QcommerceCore\Classes\Sites;
 use Qubiqx\QcommerceCore\Models\Customsetting;
-use Qubiqx\QcommerceEcommerceKeenDelivery\Classes\KeenDelivery;
 
 class KeendeliverySettingsPage extends Page implements HasForms
 {
