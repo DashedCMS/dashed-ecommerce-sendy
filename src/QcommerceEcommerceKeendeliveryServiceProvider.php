@@ -2,9 +2,9 @@
 
 namespace Qubiqx\QcommerceEcommerceKeendelivery;
 
+use Qubiqx\QcommerceEcommerceKeendelivery\Commands\QcommerceEcommerceKeendeliveryCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Qubiqx\QcommerceEcommerceKeendelivery\Commands\QcommerceEcommerceKeendeliveryCommand;
 
 class QcommerceEcommerceKeendeliveryServiceProvider extends PackageServiceProvider
 {
