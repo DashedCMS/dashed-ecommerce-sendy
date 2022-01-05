@@ -25,7 +25,7 @@ class QcommerceEcommerceKeendeliveryServiceProvider extends PluginServiceProvide
             return $model->hasMany(KeendeliveryOrder::class);
         });
 
-        if (!app()->runningInConsole()) {
+        if (! app()->runningInConsole()) {
             if (KeendeliveryOrder::where('label_printed', 0)->count()) {
                 ecommerce()->buttonActions(
                     'orders',
