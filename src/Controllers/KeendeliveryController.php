@@ -23,13 +23,8 @@ class KeendeliveryController extends FrontendController
             }
 
             return Storage::download($fileName);
-<<<<<<< HEAD
         }else{
             echo "<script>window.close();</script>";
-=======
-        } else {
-            return;
->>>>>>> 4397e413f1b87236ccdf0ecb364a2127e421a088
         }
     }
 }
