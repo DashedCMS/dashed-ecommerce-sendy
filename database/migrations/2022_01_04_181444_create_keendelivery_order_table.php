@@ -34,7 +34,9 @@ class CreateKeendeliveryOrderTable extends Migration
             $keendeliveryOrder->shipment_id = $order->keen_delivery_shipment_id;
             $keendeliveryOrder->label = $order->keen_delivery_label;
             if (Storage::disk('qcommerce')->exists('/keendelivery/labels/label-' . $order->invoice_id . '.pdf')) {
-                Storage::disk('qcommerce')->copy('/keendelivery/labels/label-' . $order->invoice_id . '.pdf', '/orders/keendelivery/labels/label-' . $order->invoice_id . '.pdf');
+                if (!Storage::disk('qcommerce')->exists('/orders/keendelivery/labels/label-' . $order->invoice_id . '.pdf')) {
+                    Storage::disk('qcommerce')->copy('/keendelivery/labels/label-' . $order->invoice_id . '.pdf', '/orders/keendelivery/labels/label-' . $order->invoice_id . '.pdf');
+                }
                 $keendeliveryOrder->label_url = '/qcommerce/orders/keendelivery/labels/label-' . $order->invoice_id . '.pdf';
             }
             $keendeliveryOrder->label_printed = $order->keen_delivery_label_printed;

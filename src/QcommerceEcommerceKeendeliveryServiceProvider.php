@@ -25,16 +25,18 @@ class QcommerceEcommerceKeendeliveryServiceProvider extends PluginServiceProvide
             return $model->hasMany(KeendeliveryOrder::class);
         });
 
-        if (KeendeliveryOrder::where('label_printed', 0)->count()) {
-            ecommerce()->buttonActions(
-                'orders',
-                array_merge(ecommerce()->buttonActions('orders'), [
-                    ButtonAction::make('downloadKeendeliveryLabels')
-                        ->label('Download KeenDelivery Labels')
-                        ->url(url(config('filament.path') . '/keendelivery/download-labels'))
-                        ->openUrlInNewTab(),
-                ])
-            );
+        if (!app()->runningInConsole()) {
+            if (KeendeliveryOrder::where('label_printed', 0)->count()) {
+                ecommerce()->buttonActions(
+                    'orders',
+                    array_merge(ecommerce()->buttonActions('orders'), [
+                        ButtonAction::make('downloadKeendeliveryLabels')
+                            ->label('Download KeenDelivery Labels')
+                            ->url(url(config('filament.path') . '/keendelivery/download-labels'))
+                            ->openUrlInNewTab(),
+                    ])
+                );
+            }
         }
     }
 
