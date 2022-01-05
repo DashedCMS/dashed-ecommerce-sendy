@@ -45,7 +45,7 @@ class QcommerceEcommerceKeendeliveryServiceProvider extends PluginServiceProvide
         $package
             ->name('qcommerce-ecommerce-keendelivery')
             ->hasRoutes([
-                'keendeliveryRoutes'
+                'keendeliveryRoutes',
             ])
             ->hasViews();
 
@@ -66,11 +66,11 @@ class QcommerceEcommerceKeendeliveryServiceProvider extends PluginServiceProvide
             array_merge(ecommerce()->widgets('orders'), [
                 'show-push-to-keendelivery-order' => [
                     'name' => 'show-push-to-keendelivery-order',
-                    'width' => 'full'
+                    'width' => 'full',
                 ],
                 'show-keendelivery-orders' => [
                     'name' => 'show-keendelivery-orders',
-                    'width' => 'sidebar'
+                    'width' => 'sidebar',
                 ],
             ])
         );

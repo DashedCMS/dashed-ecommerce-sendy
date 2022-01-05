@@ -56,7 +56,6 @@ class KeendeliverySettingsPage extends Page implements HasForms
 
         $tabs = [];
         foreach ($sites as $site) {
-
             $schema = [
                 Placeholder::make('label')
                     ->label("KeenDelivery voor {$site['name']}")
@@ -66,7 +65,7 @@ class KeendeliverySettingsPage extends Page implements HasForms
                         'lg' => 2,
                     ]),
                 Placeholder::make('label')
-                    ->label("KeenDelivery is " . (!Customsetting::get('keendelivery_connected', $site['id'], 0) ? 'niet' : '') . ' geconnect')
+                    ->label("KeenDelivery is " . (! Customsetting::get('keendelivery_connected', $site['id'], 0) ? 'niet' : '') . ' geconnect')
                     ->content(Customsetting::get('keendelivery_connection_error', $site['id'], ''))
                     ->columnSpan([
                         'default' => 1,
@@ -103,21 +102,21 @@ class KeendeliverySettingsPage extends Page implements HasForms
                                 ->rules([
                                     'max:255',
                                 ]);
-                        } else if ($option->type == 'checkbox') {
+                        } elseif ($option->type == 'checkbox') {
                             $optionsSchema[] = Toggle::make("shipping_method_service_option_{$option->id}_default")
                                 ->label($option->name);
-                        } else if ($option->type == 'email') {
+                        } elseif ($option->type == 'email') {
                             $optionsSchema[] = TextInput::make("shipping_method_service_option_{$option->id}_default")
                                 ->type('email')
                                 ->label($option->name)
                                 ->rules([
                                     'max:255',
-                                    'email'
+                                    'email',
                                 ]);
-                        } else if ($option->type == 'date') {
+                        } elseif ($option->type == 'date') {
                             $optionsSchema[] = DatePicker::make("shipping_method_service_option_{$option->id}_default")
                                 ->label($option->name);
-                        } else if ($option->type == 'selectbox') {
+                        } elseif ($option->type == 'selectbox') {
                             $choices = [];
                             foreach ($option->choices as $choice) {
                                 $choices[$choice['value']] = $choice['text'];
@@ -132,12 +131,12 @@ class KeendeliverySettingsPage extends Page implements HasForms
 
                     $serviceSchema[] = Card::make()
                         ->schema($optionsSchema)
-                        ->hidden(fn($get) => !$get("shipping_method_service_{$service->id}_enabled"));
+                        ->hidden(fn ($get) => ! $get("shipping_method_service_{$service->id}_enabled"));
 
                     $schema[] = Section::make($service->name)
                         ->label($service->name)
                         ->schema($serviceSchema)
-                        ->hidden(fn($get) => !$get("shipping_method_{$shippingMethod->id}_enabled"));
+                        ->hidden(fn ($get) => ! $get("shipping_method_{$shippingMethod->id}_enabled"));
                 }
             }
 

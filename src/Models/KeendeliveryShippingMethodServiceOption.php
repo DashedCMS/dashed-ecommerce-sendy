@@ -3,7 +3,6 @@
 namespace Qubiqx\QcommerceEcommerceKeendelivery\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Qubiqx\QcommerceEcommerceCore\Models\Order;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class KeendeliveryShippingMethodServiceOption extends Model
@@ -21,12 +20,12 @@ class KeendeliveryShippingMethodServiceOption extends Model
         'type',
         'mandatory',
         'choices',
-        'default'
+        'default',
     ];
 
     protected $dates = [
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
 
     protected $casts = [
