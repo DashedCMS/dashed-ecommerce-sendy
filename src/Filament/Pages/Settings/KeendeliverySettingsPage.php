@@ -65,7 +65,7 @@ class KeendeliverySettingsPage extends Page implements HasForms
                         'lg' => 2,
                     ]),
                 Placeholder::make('label')
-                    ->label("KeenDelivery is " . (! Customsetting::get('keendelivery_connected', $site['id'], 0) ? 'niet' : '') . ' geconnect')
+                    ->label("KeenDelivery is " . (! Customsetting::get('keen_delivery_connected', $site['id'], 0) ? 'niet' : '') . ' geconnect')
                     ->content(Customsetting::get('keendelivery_connection_error', $site['id'], ''))
                     ->columnSpan([
                         'default' => 1,
@@ -183,7 +183,7 @@ class KeendeliverySettingsPage extends Page implements HasForms
                 }
             }
 
-            if (Customsetting::get('keendelivery_connected', $site['id'], 0)) {
+            if (Customsetting::get('keen_delivery_connected', $site['id'], 0)) {
                 KeenDelivery::syncShippingMethods($site['id']);
             }
         }
