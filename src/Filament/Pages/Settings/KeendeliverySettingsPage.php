@@ -84,6 +84,7 @@ class KeendeliverySettingsPage extends Page implements HasForms
 
             foreach (KeendeliveryShippingMethod::get() as $shippingMethod) {
                 $schema[] = Toggle::make("shipping_method_{$shippingMethod->id}_enabled")
+                    ->label("Verzendmethod {$shippingMethod->name} activeren")
                     ->reactive();
             }
 
