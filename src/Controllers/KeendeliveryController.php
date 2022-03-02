@@ -3,8 +3,8 @@
 namespace Qubiqx\QcommerceEcommerceKeendelivery\Controllers;
 
 use Illuminate\Support\Facades\Storage;
-use Qubiqx\QcommerceCore\Controllers\Frontend\FrontendController;
 use Qubiqx\QcommerceEcommerceKeendelivery\Classes\KeenDelivery;
+use Qubiqx\QcommerceCore\Controllers\Frontend\FrontendController;
 use Qubiqx\QcommerceEcommerceKeendelivery\Models\KeendeliveryOrder;
 
 class KeendeliveryController extends FrontendController
