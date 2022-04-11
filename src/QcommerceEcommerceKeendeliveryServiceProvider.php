@@ -2,15 +2,15 @@
 
 namespace Qubiqx\QcommerceEcommerceKeendelivery;
 
-use Filament\Pages\Actions\ButtonAction;
-use Filament\PluginServiceProvider;
 use Livewire\Livewire;
+use Filament\PluginServiceProvider;
+use Spatie\LaravelPackageTools\Package;
+use Filament\Pages\Actions\ButtonAction;
 use Qubiqx\QcommerceEcommerceCore\Models\Order;
-use Qubiqx\QcommerceEcommerceKeendelivery\Filament\Pages\Settings\KeendeliverySettingsPage;
+use Qubiqx\QcommerceEcommerceKeendelivery\Models\KeendeliveryOrder;
 use Qubiqx\QcommerceEcommerceKeendelivery\Livewire\Orders\ShowKeendeliveryOrders;
 use Qubiqx\QcommerceEcommerceKeendelivery\Livewire\Orders\ShowPushToKeendeliveryOrder;
-use Qubiqx\QcommerceEcommerceKeendelivery\Models\KeendeliveryOrder;
-use Spatie\LaravelPackageTools\Package;
+use Qubiqx\QcommerceEcommerceKeendelivery\Filament\Pages\Settings\KeendeliverySettingsPage;
 
 class QcommerceEcommerceKeendeliveryServiceProvider extends PluginServiceProvider
 {

@@ -2,9 +2,10 @@
 
 namespace Qubiqx\QcommerceEcommerceKeendelivery\Models;
 
+use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Model;
-use Qubiqx\QcommerceEcommerceCore\Models\Order;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Qubiqx\QcommerceEcommerceCore\Models\Order;
 
 class KeendeliveryOrder extends Model
 {
@@ -32,6 +33,11 @@ class KeendeliveryOrder extends Model
         'track_and_trace' => 'array',
         'label_printed' => 'boolean',
     ];
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults();
+    }
 
     public function order()
     {

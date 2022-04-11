@@ -2,6 +2,7 @@
 
 namespace Qubiqx\QcommerceEcommerceKeendelivery\Models;
 
+use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -32,6 +33,11 @@ class KeendeliveryShippingMethodServiceOption extends Model
         'mandatory' => 'boolean',
         'choices' => 'array',
     ];
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults();
+    }
 
     public function keendeliveryShippingMethodService()
     {
