@@ -146,13 +146,13 @@ class ShowPushToKeendeliveryOrder extends Component implements HasForms
             $orderLog->save();
 
 //            try {
-                Mail::to($this->order->email)->send(new TrackandTraceMail($keendeliveryOrder));
+            Mail::to($this->order->email)->send(new TrackandTraceMail($keendeliveryOrder));
 
-                $orderLog = new OrderLog();
-                $orderLog->order_id = $this->order->id;
-                $orderLog->user_id = Auth::user()->id;
-                $orderLog->tag = 'order.t&t.send';
-                $orderLog->save();
+            $orderLog = new OrderLog();
+            $orderLog->order_id = $this->order->id;
+            $orderLog->user_id = Auth::user()->id;
+            $orderLog->tag = 'order.t&t.send';
+            $orderLog->save();
 //            } catch (\Exception $e) {
 //                $orderLog = new OrderLog();
 //                $orderLog->order_id = $this->order->id;
