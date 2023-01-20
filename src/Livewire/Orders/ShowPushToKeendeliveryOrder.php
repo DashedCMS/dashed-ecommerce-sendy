@@ -172,13 +172,13 @@ class ShowPushToKeendeliveryOrder extends Component implements HasForms
                 if (is_array($error)) {
                     foreach ($error as $errorItem) {
                         $this->emit('notify', [
-                            'status' => 'error',
+                            'status' => 'danger',
                             'message' => $errorItem,
                         ]);
                     }
                 } else {
                     $this->emit('notify', [
-                        'status' => 'error',
+                        'status' => 'danger',
                         'message' => $error,
                     ]);
                 }
