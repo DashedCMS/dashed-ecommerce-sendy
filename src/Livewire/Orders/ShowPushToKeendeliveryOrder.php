@@ -145,7 +145,7 @@ class ShowPushToKeendeliveryOrder extends Component implements HasForms
             $orderLog->tag = 'order.pushed-to-keendelivery';
             $orderLog->save();
 
-//            try {
+            //            try {
             Mail::to($this->order->email)->send(new TrackandTraceMail($keendeliveryOrder));
 
             $orderLog = new OrderLog();
@@ -153,13 +153,13 @@ class ShowPushToKeendeliveryOrder extends Component implements HasForms
             $orderLog->user_id = Auth::user()->id;
             $orderLog->tag = 'order.t&t.send';
             $orderLog->save();
-//            } catch (\Exception $e) {
-//                $orderLog = new OrderLog();
-//                $orderLog->order_id = $this->order->id;
-//                $orderLog->user_id = Auth::user()->id;
-//                $orderLog->tag = 'order.t&t.not-send';
-//                $orderLog->save();
-//            }
+            //            } catch (\Exception $e) {
+            //                $orderLog = new OrderLog();
+            //                $orderLog->order_id = $this->order->id;
+            //                $orderLog->user_id = Auth::user()->id;
+            //                $orderLog->tag = 'order.t&t.not-send';
+            //                $orderLog->save();
+            //            }
 
 
             $this->emit('refreshPage');
