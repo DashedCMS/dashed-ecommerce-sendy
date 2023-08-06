@@ -1,17 +1,17 @@
 {
-    "name": "qubiqx/qcommerce-ecommerce-keendelivery",
-    "description": "This is my package qcommerce-ecommerce-keendelivery",
+    "name": "dashed/dashed-ecommerce-keendelivery",
+    "description": "This is my package dashed-ecommerce-keendelivery",
     "keywords": [
-        "Qubiqx",
+        "Dashed",
         "laravel",
-        "qcommerce-ecommerce-keendelivery"
+        "dashed-ecommerce-keendelivery"
     ],
-    "homepage": "https://github.com/qubiqx/qcommerce-ecommerce-keendelivery",
+    "homepage": "https://github.com/Dashed-DEV/dashed-ecommerce-keendelivery",
     "license": "MIT",
     "authors": [
         {
             "name": "Robin van Maasakker",
-            "email": "robin@qubiqx.com",
+            "email": "robin@dashed.nl",
             "role": "Developer"
         }
     ],
@@ -29,13 +29,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Qubiqx\\QcommerceEcommerceKeendelivery\\": "src",
-            "Qubiqx\\QcommerceEcommerceKeendelivery\\Database\\Factories\\": "database/factories"
+            "Dashed\\DashedEcommerceKeendelivery\\": "src",
+            "Dashed\\DashedEcommerceKeendelivery\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Qubiqx\\QcommerceEcommerceKeendelivery\\Tests\\": "tests"
+            "Dashed\\DashedEcommerceKeendelivery\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -52,10 +52,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Qubiqx\\QcommerceEcommerceKeendelivery\\QcommerceEcommerceKeendeliveryServiceProvider"
+                "Dashed\\DashedEcommerceKeendelivery\\DashedEcommerceKeendeliveryServiceProvider"
             ],
             "aliases": {
-                "QcommerceEcommerceKeendelivery": "Qubiqx\\QcommerceEcommerceKeendelivery\\Facades\\QcommerceEcommerceKeendelivery"
+                "DashedEcommerceKeendelivery": "Dashed\\DashedEcommerceKeendelivery\\Facades\\DashedEcommerceKeendelivery"
             }
         }
     },

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Qubiqx\QcommerceEcommerceKeendelivery\Models\KeendeliveryOrder;
+use Dashed\DashedEcommerceKeendelivery\Models\KeendeliveryOrder;
 
 class CreateKeendeliveryOrderTable extends Migration
 {
@@ -15,10 +15,10 @@ class CreateKeendeliveryOrderTable extends Migration
      */
     public function up()
     {
-        Schema::create('qcommerce__order_keendelivery', function (Blueprint $table) {
+        Schema::create('dashed__order_keendelivery', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('order_id')->constrained('qcommerce__orders');
+            $table->foreignId('order_id')->constrained('dashed__orders');
             $table->string('shipment_id');
             $table->longText('label')->nullable();
             $table->string('label_url')->nullable();
@@ -28,23 +28,23 @@ class CreateKeendeliveryOrderTable extends Migration
             $table->timestamps();
         });
 
-        foreach (\Qubiqx\QcommerceEcommerceCore\Models\Order::whereNotNull('keen_delivery_shipment_id')->get() as $order) {
+        foreach (\Dashed\DashedEcommerceCore\Models\Order::whereNotNull('keen_delivery_shipment_id')->get() as $order) {
             $keendeliveryOrder = new KeendeliveryOrder();
             $keendeliveryOrder->order_id = $order->id;
             $keendeliveryOrder->shipment_id = $order->keen_delivery_shipment_id;
             $keendeliveryOrder->label = $order->keen_delivery_label;
-            if (Storage::disk('qcommerce')->exists('/keendelivery/labels/label-' . $order->invoice_id . '.pdf')) {
-                if (!Storage::disk('qcommerce')->exists('/orders/keendelivery/labels/label-' . $order->invoice_id . '.pdf')) {
-                    Storage::disk('qcommerce')->copy('/keendelivery/labels/label-' . $order->invoice_id . '.pdf', '/orders/keendelivery/labels/label-' . $order->invoice_id . '.pdf');
+            if (Storage::disk('dashed')->exists('/keendelivery/labels/label-' . $order->invoice_id . '.pdf')) {
+                if (!Storage::disk('dashed')->exists('/orders/keendelivery/labels/label-' . $order->invoice_id . '.pdf')) {
+                    Storage::disk('dashed')->copy('/keendelivery/labels/label-' . $order->invoice_id . '.pdf', '/orders/keendelivery/labels/label-' . $order->invoice_id . '.pdf');
                 }
-                $keendeliveryOrder->label_url = '/qcommerce/orders/keendelivery/labels/label-' . $order->invoice_id . '.pdf';
+                $keendeliveryOrder->label_url = '/dashed/orders/keendelivery/labels/label-' . $order->invoice_id . '.pdf';
             }
             $keendeliveryOrder->label_printed = $order->keen_delivery_label_printed;
             $keendeliveryOrder->track_and_trace = json_decode($order->keen_delivery_track_and_trace, true);
             $keendeliveryOrder->save();
         }
 
-        Schema::table('qcommerce__orders', function (Blueprint $table) {
+        Schema::table('dashed__orders', function (Blueprint $table) {
             $table->dropColumn('keen_delivery_shipment_id');
             $table->dropColumn('keen_delivery_label');
             $table->dropColumn('keen_delivery_label_url');

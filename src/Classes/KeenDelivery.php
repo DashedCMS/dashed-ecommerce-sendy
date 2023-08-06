@@ -1,15 +1,15 @@
 <?php
 
-namespace Qubiqx\QcommerceEcommerceKeendelivery\Classes;
+namespace Dashed\DashedEcommerceKeendelivery\Classes;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
-use Qubiqx\QcommerceCore\Classes\Sites;
-use Qubiqx\QcommerceCore\Models\Customsetting;
-use Qubiqx\QcommerceEcommerceCore\Models\Order;
-use Qubiqx\QcommerceEcommerceKeendelivery\Models\KeendeliveryShippingMethod;
-use Qubiqx\QcommerceEcommerceKeendelivery\Models\KeendeliveryShippingMethodService;
-use Qubiqx\QcommerceEcommerceKeendelivery\Models\KeendeliveryShippingMethodServiceOption;
+use Dashed\DashedCore\Classes\Sites;
+use Dashed\DashedCore\Models\Customsetting;
+use Dashed\DashedEcommerceCore\Models\Order;
+use Dashed\DashedEcommerceKeendelivery\Models\KeendeliveryShippingMethod;
+use Dashed\DashedEcommerceKeendelivery\Models\KeendeliveryShippingMethodService;
+use Dashed\DashedEcommerceKeendelivery\Models\KeendeliveryShippingMethodServiceOption;
 
 class KeenDelivery
 {

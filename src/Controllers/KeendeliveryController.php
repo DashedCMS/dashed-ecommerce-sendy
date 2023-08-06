@@ -1,11 +1,11 @@
 <?php
 
-namespace Qubiqx\QcommerceEcommerceKeendelivery\Controllers;
+namespace Dashed\DashedEcommerceKeendelivery\Controllers;
 
 use Illuminate\Support\Facades\Storage;
-use Qubiqx\QcommerceCore\Controllers\Frontend\FrontendController;
-use Qubiqx\QcommerceEcommerceKeendelivery\Classes\KeenDelivery;
-use Qubiqx\QcommerceEcommerceKeendelivery\Models\KeendeliveryOrder;
+use Dashed\DashedCore\Controllers\Frontend\FrontendController;
+use Dashed\DashedEcommerceKeendelivery\Classes\KeenDelivery;
+use Dashed\DashedEcommerceKeendelivery\Models\KeendeliveryOrder;
 
 class KeendeliveryController extends FrontendController
 {
@@ -15,7 +15,7 @@ class KeendeliveryController extends FrontendController
 
         $response = KeenDelivery::getLabelsFromShipments($keendeliveryOrders->pluck('shipment_id'));
         if (isset($response['labels'])) {
-            $fileName = '/qcommerce/keendelivery/labels/labels-' . time() . '.pdf';
+            $fileName = '/dashed/keendelivery/labels/labels-' . time() . '.pdf';
             Storage::put($fileName, base64_decode($response['labels']));
             foreach ($keendeliveryOrders as $keendeliveryOrder) {
                 $keendeliveryOrder->label_printed = 1;

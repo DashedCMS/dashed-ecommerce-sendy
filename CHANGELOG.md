@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to `qcommerce-ecommerce-keendelivery` will be documented in this file.
+All notable changes to `dashed-ecommerce-keendelivery` will be documented in this file.
 
 ## 1.0.0 - 202X-XX-XX
 

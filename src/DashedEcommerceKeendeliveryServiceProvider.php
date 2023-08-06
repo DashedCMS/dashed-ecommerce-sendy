@@ -1,20 +1,20 @@
 <?php
 
-namespace Qubiqx\QcommerceEcommerceKeendelivery;
+namespace Dashed\DashedEcommerceKeendelivery;
 
 use Filament\Pages\Actions\ButtonAction;
 use Filament\PluginServiceProvider;
 use Livewire\Livewire;
-use Qubiqx\QcommerceEcommerceCore\Models\Order;
-use Qubiqx\QcommerceEcommerceKeendelivery\Filament\Pages\Settings\KeendeliverySettingsPage;
-use Qubiqx\QcommerceEcommerceKeendelivery\Livewire\Orders\ShowKeendeliveryOrders;
-use Qubiqx\QcommerceEcommerceKeendelivery\Livewire\Orders\ShowPushToKeendeliveryOrder;
-use Qubiqx\QcommerceEcommerceKeendelivery\Models\KeendeliveryOrder;
+use Dashed\DashedEcommerceCore\Models\Order;
+use Dashed\DashedEcommerceKeendelivery\Filament\Pages\Settings\KeendeliverySettingsPage;
+use Dashed\DashedEcommerceKeendelivery\Livewire\Orders\ShowKeendeliveryOrders;
+use Dashed\DashedEcommerceKeendelivery\Livewire\Orders\ShowPushToKeendeliveryOrder;
+use Dashed\DashedEcommerceKeendelivery\Models\KeendeliveryOrder;
 use Spatie\LaravelPackageTools\Package;
 
-class QcommerceEcommerceKeendeliveryServiceProvider extends PluginServiceProvider
+class DashedEcommerceKeendeliveryServiceProvider extends PluginServiceProvider
 {
-    public static string $name = 'qcommerce-ecommerce-keendelivery';
+    public static string $name = 'dashed-ecommerce-keendelivery';
 
     public function bootingPackage()
     {
@@ -45,7 +45,7 @@ class QcommerceEcommerceKeendeliveryServiceProvider extends PluginServiceProvide
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
         $package
-            ->name('qcommerce-ecommerce-keendelivery')
+            ->name('dashed-ecommerce-keendelivery')
             ->hasRoutes([
                 'keendeliveryRoutes',
             ])

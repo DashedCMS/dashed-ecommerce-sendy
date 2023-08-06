@@ -1,6 +1,6 @@
 <?php
 
-namespace Qubiqx\QcommerceEcommerceKeendelivery\Filament\Pages\Settings;
+namespace Dashed\DashedEcommerceKeendelivery\Filament\Pages\Settings;
 
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\DatePicker;
@@ -14,10 +14,10 @@ use Filament\Forms\Components\Toggle;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Pages\Page;
-use Qubiqx\QcommerceCore\Classes\Sites;
-use Qubiqx\QcommerceCore\Models\Customsetting;
-use Qubiqx\QcommerceEcommerceKeendelivery\Classes\KeenDelivery;
-use Qubiqx\QcommerceEcommerceKeendelivery\Models\KeendeliveryShippingMethod;
+use Dashed\DashedCore\Classes\Sites;
+use Dashed\DashedCore\Models\Customsetting;
+use Dashed\DashedEcommerceKeendelivery\Classes\KeenDelivery;
+use Dashed\DashedEcommerceKeendelivery\Models\KeendeliveryShippingMethod;
 
 class KeendeliverySettingsPage extends Page implements HasForms
 {
@@ -26,7 +26,7 @@ class KeendeliverySettingsPage extends Page implements HasForms
     protected static bool $shouldRegisterNavigation = false;
     protected static ?string $title = 'KeenDelivery';
 
-    protected static string $view = 'qcommerce-core::settings.pages.default-settings';
+    protected static string $view = 'dashed-core::settings.pages.default-settings';
 
     public function mount(): void
     {
@@ -126,7 +126,7 @@ class KeendeliverySettingsPage extends Page implements HasForms
                                 ->label($option->name)
                                 ->options($choices);
                         } else {
-                            dump('Contacteer Qubiqx om dit in te bouwen');
+                            dump('Contacteer Dashed om dit in te bouwen');
                         }
                     }
 

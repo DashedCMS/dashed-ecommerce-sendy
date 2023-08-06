@@ -13,7 +13,7 @@ class AddKeendeliveryToOrder extends Migration
      */
     public function up()
     {
-        Schema::table('qcommerce__orders', function (Blueprint $table) {
+        Schema::table('dashed__orders', function (Blueprint $table) {
             $table->string('keen_delivery_shipment_id')->nullable();
             $table->longText('keen_delivery_label')->nullable();
             $table->string('keen_delivery_label_url')->nullable();

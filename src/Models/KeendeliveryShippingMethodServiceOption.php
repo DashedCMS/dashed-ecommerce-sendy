@@ -1,6 +1,6 @@
 <?php
 
-namespace Qubiqx\QcommerceEcommerceKeendelivery\Models;
+namespace Dashed\DashedEcommerceKeendelivery\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\LogOptions;
@@ -12,7 +12,7 @@ class KeendeliveryShippingMethodServiceOption extends Model
 
     protected static $logFillable = true;
 
-    protected $table = 'qcommerce__keendelivery_shipping_method_service_options';
+    protected $table = 'dashed__keendelivery_shipping_method_service_options';
 
     protected $fillable = [
         'keendelivery_shipping_method_service_id',

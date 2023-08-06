@@ -1,6 +1,6 @@
 <?php
 
-namespace Qubiqx\QcommerceEcommerceKeendelivery\Livewire\Orders;
+namespace Dashed\DashedEcommerceKeendelivery\Livewire\Orders;
 
 use Livewire\Component;
 
@@ -15,6 +15,6 @@ class ShowKeendeliveryOrders extends Component
 
     public function render()
     {
-        return view('qcommerce-ecommerce-keendelivery::orders.components.show-keendelivery-orders');
+        return view('dashed-ecommerce-keendelivery::orders.components.show-keendelivery-orders');
     }
 }

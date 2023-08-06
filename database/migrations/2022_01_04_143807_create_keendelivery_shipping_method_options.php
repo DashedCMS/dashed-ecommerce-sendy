@@ -13,7 +13,7 @@ class CreateKeendeliveryShippingMethodOptions extends Migration
      */
     public function up()
     {
-        Schema::create('qcommerce__keendelivery_shipping_methods', function (Blueprint $table) {
+        Schema::create('dashed__keendelivery_shipping_methods', function (Blueprint $table) {
             $table->id();
 
             $table->string('name');
@@ -24,11 +24,11 @@ class CreateKeendeliveryShippingMethodOptions extends Migration
             $table->timestamps();
         });
 
-        Schema::create('qcommerce__keendelivery_shipping_method_services', function (Blueprint $table) {
+        Schema::create('dashed__keendelivery_shipping_method_services', function (Blueprint $table) {
             $table->id();
 
             $table->unsignedBigInteger('keendelivery_shipping_method_id')->nullable();
-            $table->foreign('keendelivery_shipping_method_id', 'keen_sh_me_service')->references('id')->on('qcommerce__keendelivery_shipping_methods')->cascadeOnDelete();
+            $table->foreign('keendelivery_shipping_method_id', 'keen_sh_me_service')->references('id')->on('dashed__keendelivery_shipping_methods')->cascadeOnDelete();
             $table->string('name');
             $table->string('value');
             $table->boolean('enabled')->default(0);
@@ -36,11 +36,11 @@ class CreateKeendeliveryShippingMethodOptions extends Migration
             $table->timestamps();
         });
 
-        Schema::create('qcommerce__keendelivery_shipping_method_service_options', function (Blueprint $table) {
+        Schema::create('dashed__keendelivery_shipping_method_service_options', function (Blueprint $table) {
             $table->id();
 
             $table->unsignedBigInteger('keendelivery_shipping_method_service_id')->nullable();
-            $table->foreign('keendelivery_shipping_method_service_id', 'keen_sh_me_service_option')->references('id')->on('qcommerce__keendelivery_shipping_method_services')->cascadeOnDelete();
+            $table->foreign('keendelivery_shipping_method_service_id', 'keen_sh_me_service_option')->references('id')->on('dashed__keendelivery_shipping_method_services')->cascadeOnDelete();
             $table->string('name');
             $table->string('field');
             $table->string('type');

@@ -1,15 +1,15 @@
-# This is my package qcommerce-ecommerce-keendelivery
+# This is my package dashed-ecommerce-keendelivery
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/qubiqx/qcommerce-ecommerce-keendelivery.svg?style=flat-square)](https://packagist.org/packages/qubiqx/qcommerce-ecommerce-keendelivery)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/qubiqx/qcommerce-ecommerce-keendelivery/run-tests?label=tests)](https://github.com/qubiqx/qcommerce-ecommerce-keendelivery/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/qubiqx/qcommerce-ecommerce-keendelivery/Check%20&%20fix%20styling?label=code%20style)](https://github.com/qubiqx/qcommerce-ecommerce-keendelivery/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/qubiqx/qcommerce-ecommerce-keendelivery.svg?style=flat-square)](https://packagist.org/packages/qubiqx/qcommerce-ecommerce-keendelivery)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/Dashed-DEV/dashed-ecommerce-keendelivery.svg?style=flat-square)](https://packagist.org/packages/Dashed-DEV/dashed-ecommerce-keendelivery)
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/Dashed-DEV/dashed-ecommerce-keendelivery/run-tests?label=tests)](https://github.com/Dashed-DEV/dashed-ecommerce-keendelivery/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/Dashed-DEV/dashed-ecommerce-keendelivery/Check%20&%20fix%20styling?label=code%20style)](https://github.com/Dashed-DEV/dashed-ecommerce-keendelivery/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/Dashed-DEV/dashed-ecommerce-keendelivery.svg?style=flat-square)](https://packagist.org/packages/Dashed-DEV/dashed-ecommerce-keendelivery)
 
 This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
 
 ## Support us
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/qcommerce-ecommerce-keendelivery.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/qcommerce-ecommerce-keendelivery)
+[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/dashed-ecommerce-keendelivery.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/dashed-ecommerce-keendelivery)
 
 We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
 
@@ -20,26 +20,26 @@ We highly appreciate you sending us a postcard from your hometown, mentioning wh
 You can install the package via composer:
 
 ```bash
-composer require qubiqx/qcommerce-ecommerce-keendelivery
+composer require dashed/dashed-ecommerce-keendelivery
 ```
 
 You can publish and run the migrations with:
 
 ```bash
-php artisan vendor:publish --tag="qcommerce-ecommerce-keendelivery-migrations"
+php artisan vendor:publish --tag="dashed-ecommerce-keendelivery-migrations"
 php artisan migrate
 ```
 
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag="qcommerce-ecommerce-keendelivery-config"
+php artisan vendor:publish --tag="dashed-ecommerce-keendelivery-config"
 ```
 
 Optionally, you can publish the views using
 
 ```bash
-php artisan vendor:publish --tag="qcommerce-ecommerce-keendelivery-views"
+php artisan vendor:publish --tag="dashed-ecommerce-keendelivery-views"
 ```
 
 This is the contents of the published config file:
@@ -52,8 +52,8 @@ return [
 ## Usage
 
 ```php
-$qcommerce-ecommerce-keendelivery = new Qubiqx\QcommerceEcommerceKeendelivery();
-echo $qcommerce-ecommerce-keendelivery->echoPhrase('Hello, Qubiqx!');
+$dashed-ecommerce-keendelivery = new Dashed\DashedEcommerceKeendelivery();
+echo $dashed-ecommerce-keendelivery->echoPhrase('Hello, Dashed!');
 ```
 
 ## Testing
@@ -76,7 +76,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [Robin van Maasakker](https://github.com/Qubiqx)
+- [Robin van Maasakker](https://github.com/Dashed)
 - [All Contributors](../../contributors)
 
 ## License

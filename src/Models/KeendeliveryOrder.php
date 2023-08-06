@@ -1,9 +1,9 @@
 <?php
 
-namespace Qubiqx\QcommerceEcommerceKeendelivery\Models;
+namespace Dashed\DashedEcommerceKeendelivery\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Qubiqx\QcommerceEcommerceCore\Models\Order;
+use Dashed\DashedEcommerceCore\Models\Order;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -13,7 +13,7 @@ class KeendeliveryOrder extends Model
 
     protected static $logFillable = true;
 
-    protected $table = 'qcommerce__order_keendelivery';
+    protected $table = 'dashed__order_keendelivery';
 
     protected $fillable = [
         'order_id',

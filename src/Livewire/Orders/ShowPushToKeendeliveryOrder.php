@@ -1,6 +1,6 @@
 <?php
 
-namespace Qubiqx\QcommerceEcommerceKeendelivery\Livewire\Orders;
+namespace Dashed\DashedEcommerceKeendelivery\Livewire\Orders;
 
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Section;
@@ -13,11 +13,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
-use Qubiqx\QcommerceEcommerceCore\Models\OrderLog;
-use Qubiqx\QcommerceEcommerceKeendelivery\Classes\KeenDelivery;
-use Qubiqx\QcommerceEcommerceKeendelivery\Mail\TrackandTraceMail;
-use Qubiqx\QcommerceEcommerceKeendelivery\Models\KeendeliveryOrder;
-use Qubiqx\QcommerceEcommerceKeendelivery\Models\KeendeliveryShippingMethod;
+use Dashed\DashedEcommerceCore\Models\OrderLog;
+use Dashed\DashedEcommerceKeendelivery\Classes\KeenDelivery;
+use Dashed\DashedEcommerceKeendelivery\Mail\TrackandTraceMail;
+use Dashed\DashedEcommerceKeendelivery\Models\KeendeliveryOrder;
+use Dashed\DashedEcommerceKeendelivery\Models\KeendeliveryShippingMethod;
 
 class ShowPushToKeendeliveryOrder extends Component implements HasForms
 {
@@ -43,7 +43,7 @@ class ShowPushToKeendeliveryOrder extends Component implements HasForms
 
     public function render()
     {
-        return view('qcommerce-ecommerce-keendelivery::orders.components.show-push-to-keendelivery-order');
+        return view('dashed-ecommerce-keendelivery::orders.components.show-push-to-keendelivery-order');
     }
 
     protected function getFormStatePath(): ?string
@@ -112,7 +112,7 @@ class ShowPushToKeendeliveryOrder extends Component implements HasForms
                             ->required($option->mandatory)
                             ->hidden(fn (\Closure $get) => $get("service") != $service->value);
                     } else {
-                        dump('Contacteer Qubiqx om dit in te bouwen');
+                        dump('Contacteer Dashed om dit in te bouwen');
                     }
                 }
             }
@@ -134,7 +134,7 @@ class ShowPushToKeendeliveryOrder extends Component implements HasForms
             $keendeliveryOrder->order_id = $this->order->id;
             $keendeliveryOrder->shipment_id = $response['shipment_id'];
             $keendeliveryOrder->label = $response['label'];
-            Storage::put('/qcommerce/orders/keendelivery/labels/label-' . $this->order->invoice_id . '.pdf', base64_decode($response['label']));
+            Storage::put('/dashed/orders/keendelivery/labels/label-' . $this->order->invoice_id . '.pdf', base64_decode($response['label']));
             $keendeliveryOrder->label_url = '/keendelivery/labels/label-' . $this->order->invoice_id . '.pdf';
             $keendeliveryOrder->track_and_trace = $response['track_and_trace'];
             $keendeliveryOrder->save();
