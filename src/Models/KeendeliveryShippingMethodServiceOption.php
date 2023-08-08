@@ -24,11 +24,6 @@ class KeendeliveryShippingMethodServiceOption extends Model
         'default',
     ];
 
-    protected $dates = [
-        'created_at',
-        'updated_at',
-    ];
-
     protected $casts = [
         'mandatory' => 'boolean',
         'choices' => 'array',

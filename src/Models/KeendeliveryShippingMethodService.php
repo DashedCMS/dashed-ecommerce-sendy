@@ -21,11 +21,6 @@ class KeendeliveryShippingMethodService extends Model
         'enabled',
     ];
 
-    protected $dates = [
-        'created_at',
-        'updated_at',
-    ];
-
     protected $casts = [
         'enabled' => 'boolean',
     ];

@@ -24,14 +24,11 @@ class KeendeliveryOrder extends Model
         'label_printed',
     ];
 
-    protected $dates = [
-        'created_at',
-        'updated_at',
-    ];
-
     protected $casts = [
         'track_and_trace' => 'array',
         'label_printed' => 'boolean',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     public function getActivitylogOptions(): LogOptions
