@@ -2,12 +2,12 @@
 
 namespace Dashed\DashedEcommerceKeendelivery\Mail;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Mail\Mailable;
-use Illuminate\Queue\SerializesModels;
 use Dashed\DashedCore\Models\Customsetting;
 use Dashed\DashedEcommerceKeendelivery\Models\KeendeliveryOrder;
 use Dashed\DashedTranslations\Models\Translation;
+use Illuminate\Bus\Queueable;
+use Illuminate\Mail\Mailable;
+use Illuminate\Queue\SerializesModels;
 
 class TrackandTraceMail extends Mailable
 {
