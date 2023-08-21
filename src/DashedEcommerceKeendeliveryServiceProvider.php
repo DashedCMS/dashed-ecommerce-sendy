@@ -9,6 +9,7 @@ use Dashed\DashedEcommerceKeendelivery\Livewire\Orders\ShowPushToKeendeliveryOrd
 use Dashed\DashedEcommerceKeendelivery\Models\KeendeliveryOrder;
 use Filament\Pages\Actions\ButtonAction;
 use Filament\PluginServiceProvider;
+use Filament\Tables\Actions\Action;
 use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
 
@@ -30,7 +31,8 @@ class DashedEcommerceKeendeliveryServiceProvider extends PluginServiceProvider
                 ecommerce()->buttonActions(
                     'orders',
                     array_merge(ecommerce()->buttonActions('orders'), [
-                        ButtonAction::make('downloadKeendeliveryLabels')
+                        Action::make('downloadKeendeliveryLabels')
+                            ->button()
                             ->label('Download KeenDelivery Labels')
                             ->url(url(config('filament.path') . '/keendelivery/download-labels'))
                             ->openUrlInNewTab(),

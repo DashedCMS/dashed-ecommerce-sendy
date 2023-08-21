@@ -130,15 +130,16 @@ class KeenDelivery
         return $response;
     }
 
-    public static function getLabelsFromShipments($shipmentIds)
+    public static function getLabelsFromShipments(array $shipmentIds = [])
     {
         $response = Http::withHeaders([
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
-        ])->post('https://portal.keendelivery.com/api/v2/label?api_token=' . Customsetting::get('keen_delivery_api_key'), [
-            'shipments' => $shipmentIds,
-        ]);
-        $response = json_decode($response->body(), true);
+        ])
+            ->post('https://portal.keendelivery.com/api/v2/label?api_token=' . Customsetting::get('keen_delivery_api_key'), [
+                'shipments' => $shipmentIds,
+            ])
+            ->json();
 
         return $response;
     }

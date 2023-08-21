@@ -13,10 +13,10 @@ class KeendeliveryController extends FrontendController
     {
         $keendeliveryOrders = KeendeliveryOrder::where('label_printed', 0)->get();
 
-        $response = KeenDelivery::getLabelsFromShipments($keendeliveryOrders->pluck('shipment_id'));
+        $response = KeenDelivery::getLabelsFromShipments($keendeliveryOrders->pluck('shipment_id')->toArray());
         if (isset($response['labels'])) {
             $fileName = '/dashed/keendelivery/labels/labels-' . time() . '.pdf';
-            Storage::put($fileName, base64_decode($response['labels']));
+            Storage::disk('dashed')->put($fileName, base64_decode($response['labels']));
             foreach ($keendeliveryOrders as $keendeliveryOrder) {
                 $keendeliveryOrder->label_printed = 1;
                 $keendeliveryOrder->save();
