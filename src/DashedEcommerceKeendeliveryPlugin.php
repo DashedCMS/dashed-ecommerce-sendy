@@ -2,9 +2,9 @@
 
 namespace Dashed\DashedEcommerceKeendelivery;
 
-use Filament\Panel;
-use Filament\Contracts\Plugin;
 use Dashed\DashedEcommerceKeendelivery\Filament\Pages\Settings\KeendeliverySettingsPage;
+use Filament\Contracts\Plugin;
+use Filament\Panel;
 
 class DashedEcommerceKeendeliveryPlugin implements Plugin
 {
