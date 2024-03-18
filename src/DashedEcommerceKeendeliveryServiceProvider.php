@@ -2,15 +2,15 @@
 
 namespace Dashed\DashedEcommerceKeendelivery;
 
-use Livewire\Livewire;
-use Filament\Actions\Action;
-use Spatie\LaravelPackageTools\Package;
 use Dashed\DashedEcommerceCore\Models\Order;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Dashed\DashedEcommerceKeendelivery\Models\KeendeliveryOrder;
+use Dashed\DashedEcommerceKeendelivery\Filament\Pages\Settings\KeendeliverySettingsPage;
 use Dashed\DashedEcommerceKeendelivery\Livewire\Orders\ShowKeendeliveryOrders;
 use Dashed\DashedEcommerceKeendelivery\Livewire\Orders\ShowPushToKeendeliveryOrder;
-use Dashed\DashedEcommerceKeendelivery\Filament\Pages\Settings\KeendeliverySettingsPage;
+use Dashed\DashedEcommerceKeendelivery\Models\KeendeliveryOrder;
+use Filament\Actions\Action;
+use Livewire\Livewire;
+use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class DashedEcommerceKeendeliveryServiceProvider extends PackageServiceProvider
 {
