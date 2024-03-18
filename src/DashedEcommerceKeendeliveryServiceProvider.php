@@ -2,17 +2,17 @@
 
 namespace Dashed\DashedEcommerceKeendelivery;
 
+use Livewire\Livewire;
+use Filament\Actions\Action;
+use Spatie\LaravelPackageTools\Package;
 use Dashed\DashedEcommerceCore\Models\Order;
-use Dashed\DashedEcommerceKeendelivery\Filament\Pages\Settings\KeendeliverySettingsPage;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Dashed\DashedEcommerceKeendelivery\Models\KeendeliveryOrder;
 use Dashed\DashedEcommerceKeendelivery\Livewire\Orders\ShowKeendeliveryOrders;
 use Dashed\DashedEcommerceKeendelivery\Livewire\Orders\ShowPushToKeendeliveryOrder;
-use Dashed\DashedEcommerceKeendelivery\Models\KeendeliveryOrder;
-use Filament\Pages\Actions\Action;
-use Filament\PluginServiceProvider;
-use Livewire\Livewire;
-use Spatie\LaravelPackageTools\Package;
+use Dashed\DashedEcommerceKeendelivery\Filament\Pages\Settings\KeendeliverySettingsPage;
 
-class DashedEcommerceKeendeliveryServiceProvider extends PluginServiceProvider
+class DashedEcommerceKeendeliveryServiceProvider extends PackageServiceProvider
 {
     public static string $name = 'dashed-ecommerce-keendelivery';
 
@@ -58,7 +58,7 @@ class DashedEcommerceKeendeliveryServiceProvider extends PluginServiceProvider
                 'keendelivery' => [
                     'name' => 'KeenDelivery',
                     'description' => 'Koppel KeenDelivery',
-                    'icon' => 'archive',
+                    'icon' => 'archive-box',
                     'page' => KeendeliverySettingsPage::class,
                 ],
             ])
@@ -69,7 +69,7 @@ class DashedEcommerceKeendeliveryServiceProvider extends PluginServiceProvider
             array_merge(ecommerce()->widgets('orders'), [
                 'show-push-to-keendelivery-order' => [
                     'name' => 'show-push-to-keendelivery-order',
-                    'width' => 'full',
+                    'width' => 'sidebar',
                 ],
                 'show-keendelivery-orders' => [
                     'name' => 'show-keendelivery-orders',
@@ -77,12 +77,5 @@ class DashedEcommerceKeendeliveryServiceProvider extends PluginServiceProvider
                 ],
             ])
         );
-    }
-
-    protected function getPages(): array
-    {
-        return array_merge(parent::getPages(), [
-            KeendeliverySettingsPage::class,
-        ]);
     }
 }

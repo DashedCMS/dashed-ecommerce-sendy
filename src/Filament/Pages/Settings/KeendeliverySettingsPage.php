@@ -2,31 +2,29 @@
 
 namespace Dashed\DashedEcommerceKeendelivery\Filament\Pages\Settings;
 
+use Filament\Pages\Page;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Tabs;
 use Dashed\DashedCore\Classes\Sites;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Tabs\Tab;
+use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Placeholder;
 use Dashed\DashedCore\Models\Customsetting;
 use Dashed\DashedEcommerceKeendelivery\Classes\KeenDelivery;
 use Dashed\DashedEcommerceKeendelivery\Models\KeendeliveryShippingMethod;
-use Filament\Forms\Components\Card;
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Placeholder;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Tabs;
-use Filament\Forms\Components\Tabs\Tab;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
-use Filament\Pages\Page;
 
-class KeendeliverySettingsPage extends Page implements HasForms
+class KeendeliverySettingsPage extends Page
 {
-    use InteractsWithForms;
-
     protected static bool $shouldRegisterNavigation = false;
     protected static ?string $title = 'KeenDelivery';
 
     protected static string $view = 'dashed-core::settings.pages.default-settings';
+    public array $data = [];
 
     public function mount(): void
     {
@@ -73,9 +71,7 @@ class KeendeliverySettingsPage extends Page implements HasForms
                     ]),
                 TextInput::make("keen_delivery_api_key_{$site['id']}")
                     ->label('KeenDelivery API key')
-                    ->rules([
-                        'max:255',
-                    ])
+                    ->maxLength(255)
                     ->columnSpan([
                         'default' => 1,
                         'lg' => 2,
@@ -100,9 +96,7 @@ class KeendeliverySettingsPage extends Page implements HasForms
                         if ($option->type == 'textbox') {
                             $optionsSchema[] = TextInput::make("shipping_method_service_option_{$option->id}_default")
                                 ->label($option->name)
-                                ->rules([
-                                    'max:255',
-                                ]);
+                                ->maxLength(255);
                         } elseif ($option->type == 'checkbox') {
                             $optionsSchema[] = Toggle::make("shipping_method_service_option_{$option->id}_default")
                                 ->label($option->name);
@@ -110,10 +104,8 @@ class KeendeliverySettingsPage extends Page implements HasForms
                             $optionsSchema[] = TextInput::make("shipping_method_service_option_{$option->id}_default")
                                 ->type('email')
                                 ->label($option->name)
-                                ->rules([
-                                    'max:255',
-                                    'email',
-                                ]);
+                                ->email()
+                                ->maxLength(255);
                         } elseif ($option->type == 'date') {
                             $optionsSchema[] = DatePicker::make("shipping_method_service_option_{$option->id}_default")
                                 ->label($option->name);
@@ -155,6 +147,11 @@ class KeendeliverySettingsPage extends Page implements HasForms
         return $tabGroups;
     }
 
+    public function getFormStatePath(): ?string
+    {
+        return 'data';
+    }
+
     public function submit()
     {
         $sites = Sites::getSites();
@@ -189,7 +186,10 @@ class KeendeliverySettingsPage extends Page implements HasForms
             }
         }
 
-        $this->notify('success', 'De KeenDelivery instellingen zijn opgeslagen');
+        Notification::make()
+            ->title('De KeenDelivery instellingen zijn opgeslagen')
+            ->success()
+            ->send();
 
         return redirect(KeendeliverySettingsPage::getUrl());
     }
