@@ -10,15 +10,7 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Dashed\DashedEcommerceKeendelivery\Models\KeendeliveryOrder;
 use Dashed\DashedEcommerceKeendelivery\Livewire\Orders\ShowKeendeliveryOrders;
 use Dashed\DashedEcommerceKeendelivery\Livewire\Orders\ShowPushToKeendeliveryOrder;
-<<<<<<< HEAD
 use Dashed\DashedEcommerceKeendelivery\Filament\Pages\Settings\KeendeliverySettingsPage;
-=======
-use Dashed\DashedEcommerceKeendelivery\Models\KeendeliveryOrder;
-use Filament\Actions\Action;
-use Livewire\Livewire;
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
->>>>>>> filamentv3
 
 class DashedEcommerceKeendeliveryServiceProvider extends PackageServiceProvider
 {

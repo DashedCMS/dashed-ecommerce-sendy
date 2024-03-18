@@ -17,20 +17,6 @@ use Filament\Forms\Components\Placeholder;
 use Dashed\DashedCore\Models\Customsetting;
 use Dashed\DashedEcommerceKeendelivery\Classes\KeenDelivery;
 use Dashed\DashedEcommerceKeendelivery\Models\KeendeliveryShippingMethod;
-<<<<<<< HEAD
-=======
-use Filament\Forms\Components\Card;
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Placeholder;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Tabs;
-use Filament\Forms\Components\Tabs\Tab;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
-use Filament\Notifications\Notification;
-use Filament\Pages\Page;
->>>>>>> filamentv3
 
 class KeendeliverySettingsPage extends Page
 {
