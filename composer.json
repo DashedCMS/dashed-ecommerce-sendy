@@ -1,12 +1,12 @@
 {
-    "name": "dashed/dashed-ecommerce-keendelivery",
-    "description": "This is my package dashed-ecommerce-keendelivery",
+    "name": "dashed/dashed-ecommerce-sendy",
+    "description": "This is my package dashed-ecommerce-sendy",
     "keywords": [
         "Dashed",
         "laravel",
-        "dashed-ecommerce-keendelivery"
+        "dashed-ecommerce-sendy"
     ],
-    "homepage": "https://github.com/Dashed-DEV/dashed-ecommerce-keendelivery",
+    "homepage": "https://github.com/Dashed-DEV/dashed-ecommerce-sendy",
     "license": "MIT",
     "authors": [
         {
