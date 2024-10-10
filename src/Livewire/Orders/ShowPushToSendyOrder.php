@@ -78,7 +78,7 @@ class ShowPushToSendyOrder extends Component implements HasForms, HasActions
                         ->required()
                         ->reactive()
                         ->options($services->pluck('name', 'value'))
-                        ->hidden(fn (Get $get) => $get("shipping_method") != $shippingMethod->value);
+                        ->hidden(fn(Get $get) => $get("shipping_method") != $shippingMethod->value);
 
                     foreach ($services as $service) {
                         foreach ($service->sendyShippingMethodServiceOptions as $option) {
@@ -87,12 +87,12 @@ class ShowPushToSendyOrder extends Component implements HasForms, HasActions
                                     ->label($option->name)
                                     ->maxLength(255)
                                     ->required($option->mandatory)
-                                    ->hidden(fn (Get $get) => $get("service") != $service->value);
+                                    ->hidden(fn(Get $get) => $get("service") != $service->value);
                             } elseif ($option->type == 'checkbox') {
                                 $schema[] = Toggle::make("shipping_method_service_option_{$option->field}")
                                     ->label($option->name)
                                     ->required($option->mandatory)
-                                    ->hidden(fn (Get $get) => $get("service") != $service->value);
+                                    ->hidden(fn(Get $get) => $get("service") != $service->value);
                             } elseif ($option->type == 'email') {
                                 $schema[] = TextInput::make("shipping_method_service_option_{$option->field}")
                                     ->type('email')
@@ -100,12 +100,12 @@ class ShowPushToSendyOrder extends Component implements HasForms, HasActions
                                     ->required($option->mandatory)
                                     ->email()
                                     ->maxLength(255)
-                                    ->hidden(fn (Get $get) => $get("service") != $service->value);
+                                    ->hidden(fn(Get $get) => $get("service") != $service->value);
                             } elseif ($option->type == 'date') {
                                 $schema[] = DatePicker::make("shipping_method_service_option_{$option->field}")
                                     ->label($option->name)
                                     ->required($option->mandatory)
-                                    ->hidden(fn (Get $get) => $get("service") != $service->value);
+                                    ->hidden(fn(Get $get) => $get("service") != $service->value);
                             } elseif ($option->type == 'selectbox') {
                                 $choices = [];
                                 foreach ($option->choices as $choice) {
@@ -115,7 +115,7 @@ class ShowPushToSendyOrder extends Component implements HasForms, HasActions
                                     ->label($option->name)
                                     ->options($choices)
                                     ->required($option->mandatory)
-                                    ->hidden(fn (Get $get) => $get("service") != $service->value);
+                                    ->hidden(fn(Get $get) => $get("service") != $service->value);
                             } else {
                                 dump('Contacteer Dashed om dit in te bouwen');
                             }
@@ -134,10 +134,15 @@ class ShowPushToSendyOrder extends Component implements HasForms, HasActions
                     $sendyOrder->order_id = $this->order->id;
                     $sendyOrder->shipment_id = $response['shipment_id'];
                     $sendyOrder->label = $response['label'];
-                    Storage::disk('public')->put('/dashed/orders/sendy/labels/label-' . $this->order->invoice_id . '.pdf', base64_decode($response['label']));
-                    $sendyOrder->label_url = '/sendy/labels/label-' . $this->order->invoice_id . '.pdf';
+                    $time = uniqid();
+                    Storage::disk('public')->put('/dashed/orders/sendy/labels/label-' . $this->order->invoice_id . '-' . $time . '.pdf', base64_decode($response['label']));
+                    $sendyOrder->label_url = '/sendy/labels/label-' . $this->order->invoice_id . '-' . $time . '.pdf';
                     $sendyOrder->track_and_trace = $response['track_and_trace'];
                     $sendyOrder->save();
+
+                    foreach ($response['track_and_trace'] as $code => $link) {
+                        $this->order->addTrackAndTrace('sendy', $data['service'], $code, $link);
+                    }
 
                     $orderLog = new OrderLog();
                     $orderLog->order_id = $this->order->id;
@@ -145,26 +150,26 @@ class ShowPushToSendyOrder extends Component implements HasForms, HasActions
                     $orderLog->tag = 'order.pushed-to-sendy';
                     $orderLog->save();
 
-                    try {
-                        Mail::to($this->order->email)->send(new TrackandTraceMail($sendyOrder));
-
-                        $orderLog = new OrderLog();
-                        $orderLog->order_id = $this->order->id;
-                        $orderLog->user_id = Auth::user()->id;
-                        $orderLog->tag = 'order.t&t.send';
-                        $orderLog->save();
-                    } catch (\Exception $e) {
-                        $orderLog = new OrderLog();
-                        $orderLog->order_id = $this->order->id;
-                        $orderLog->user_id = Auth::user()->id;
-                        $orderLog->tag = 'order.t&t.not-send';
-                        $orderLog->save();
-                    }
+//                    try {
+//                        Mail::to($this->order->email)->send(new TrackandTraceMail($sendyOrder));
+//
+//                        $orderLog = new OrderLog();
+//                        $orderLog->order_id = $this->order->id;
+//                        $orderLog->user_id = Auth::user()->id;
+//                        $orderLog->tag = 'order.t&t.send';
+//                        $orderLog->save();
+//                    } catch (\Exception $e) {
+//                        $orderLog = new OrderLog();
+//                        $orderLog->order_id = $this->order->id;
+//                        $orderLog->user_id = Auth::user()->id;
+//                        $orderLog->tag = 'order.t&t.not-send';
+//                        $orderLog->save();
+//                    }
 
 
                     $this->dispatch('refreshPage');
                     Notification::make()
-                        ->title('De bestelling wordt binnen enkele minuten naar Sendy gepushed.')
+                        ->title('De bestelling is naar Sendy gepushed.')
                         ->success()
                         ->send();
                 } else {

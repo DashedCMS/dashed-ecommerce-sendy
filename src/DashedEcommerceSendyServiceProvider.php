@@ -33,7 +33,7 @@ class DashedEcommerceSendyServiceProvider extends PackageServiceProvider
                         Action::make('downloadSendyLabels')
                             ->button()
                             ->label('Download Sendy Labels')
-                            ->url(url(config('filament.path') . '/sendy/download-labels'))
+                            ->url(url(config('filament.path', 'dashed') . '/sendy/download-labels'))
                             ->openUrlInNewTab(),
                     ])
                 );
