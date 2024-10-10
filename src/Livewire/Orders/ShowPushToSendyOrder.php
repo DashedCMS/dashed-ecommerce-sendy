@@ -1,6 +1,6 @@
 <?php
 
-namespace Dashed\DashedEcommerceKeendelivery\Livewire\Orders;
+namespace Dashed\DashedEcommerceSendy\Livewire\Orders;
 
 use Filament\Forms\Get;
 use Livewire\Component;
@@ -19,12 +19,12 @@ use Dashed\DashedEcommerceCore\Models\Order;
 use Dashed\DashedEcommerceCore\Models\OrderLog;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Actions\Concerns\InteractsWithActions;
-use Dashed\DashedEcommerceKeendelivery\Classes\KeenDelivery;
-use Dashed\DashedEcommerceKeendelivery\Mail\TrackandTraceMail;
-use Dashed\DashedEcommerceKeendelivery\Models\KeendeliveryOrder;
-use Dashed\DashedEcommerceKeendelivery\Models\KeendeliveryShippingMethod;
+use Dashed\DashedEcommerceSendy\Classes\Sendy;
+use Dashed\DashedEcommerceSendy\Mail\TrackandTraceMail;
+use Dashed\DashedEcommerceSendy\Models\SendyOrder;
+use Dashed\DashedEcommerceSendy\Models\SendyShippingMethod;
 
-class ShowPushToKeendeliveryOrder extends Component implements HasForms, HasActions
+class ShowPushToSendyOrder extends Component implements HasForms, HasActions
 {
     use InteractsWithForms;
     use InteractsWithActions;
@@ -44,16 +44,16 @@ class ShowPushToKeendeliveryOrder extends Component implements HasForms, HasActi
     public function action(): Action
     {
         return Action::make('action')
-            ->label('Verstuur naar KeenDelivery')
+            ->label('Verstuur naar Sendy')
             ->color('primary')
             ->fillForm(function () {
                 $data = [];
 
-                $shippingMethods = KeendeliveryShippingMethod::where('enabled', 1)->where('site_id', $this->order->site_id)->get();
+                $shippingMethods = SendyShippingMethod::where('enabled', 1)->where('site_id', $this->order->site_id)->get();
                 foreach ($shippingMethods as $shippingMethod) {
-                    $services = $shippingMethod->keendeliveryShippingMethodServices()->where('enabled', 1)->get();
+                    $services = $shippingMethod->sendyShippingMethodServices()->where('enabled', 1)->get();
                     foreach ($services as $service) {
-                        foreach ($service->keendeliveryShippingMethodServiceOptions as $option) {
+                        foreach ($service->sendyShippingMethodServiceOptions as $option) {
                             $data["shipping_method_service_option_$option->field"] = $option->default ?: null;
                         }
                     }
@@ -62,7 +62,7 @@ class ShowPushToKeendeliveryOrder extends Component implements HasForms, HasActi
                 return $data;
             })
             ->form(function () {
-                $shippingMethods = KeendeliveryShippingMethod::where('enabled', 1)->where('site_id', $this->order->site_id)->get();
+                $shippingMethods = SendyShippingMethod::where('enabled', 1)->where('site_id', $this->order->site_id)->get();
 
                 $schema = [];
                 $schema[] = Select::make('shipping_method')
@@ -72,7 +72,7 @@ class ShowPushToKeendeliveryOrder extends Component implements HasForms, HasActi
                     ->options($shippingMethods->pluck('name', 'value'));
 
                 foreach ($shippingMethods as $shippingMethod) {
-                    $services = $shippingMethod->keendeliveryShippingMethodServices()->where('enabled', 1)->get();
+                    $services = $shippingMethod->sendyShippingMethodServices()->where('enabled', 1)->get();
                     $schema[] = Select::make('service')
                         ->label('Kies een service')
                         ->required()
@@ -81,7 +81,7 @@ class ShowPushToKeendeliveryOrder extends Component implements HasForms, HasActi
                         ->hidden(fn (Get $get) => $get("shipping_method") != $shippingMethod->value);
 
                     foreach ($services as $service) {
-                        foreach ($service->keendeliveryShippingMethodServiceOptions as $option) {
+                        foreach ($service->sendyShippingMethodServiceOptions as $option) {
                             if ($option->type == 'textbox') {
                                 $schema[] = TextInput::make("shipping_method_service_option_{$option->field}")
                                     ->label($option->name)
@@ -128,25 +128,25 @@ class ShowPushToKeendeliveryOrder extends Component implements HasForms, HasActi
             ->action(function ($data) {
                 $this->validate();
 
-                $response = KeenDelivery::createShipment($this->order, $data);
+                $response = Sendy::createShipment($this->order, $data);
                 if (isset($response['shipment_id'])) {
-                    $keendeliveryOrder = new KeendeliveryOrder();
-                    $keendeliveryOrder->order_id = $this->order->id;
-                    $keendeliveryOrder->shipment_id = $response['shipment_id'];
-                    $keendeliveryOrder->label = $response['label'];
-                    Storage::disk('public')->put('/dashed/orders/keendelivery/labels/label-' . $this->order->invoice_id . '.pdf', base64_decode($response['label']));
-                    $keendeliveryOrder->label_url = '/keendelivery/labels/label-' . $this->order->invoice_id . '.pdf';
-                    $keendeliveryOrder->track_and_trace = $response['track_and_trace'];
-                    $keendeliveryOrder->save();
+                    $sendyOrder = new SendyOrder();
+                    $sendyOrder->order_id = $this->order->id;
+                    $sendyOrder->shipment_id = $response['shipment_id'];
+                    $sendyOrder->label = $response['label'];
+                    Storage::disk('public')->put('/dashed/orders/sendy/labels/label-' . $this->order->invoice_id . '.pdf', base64_decode($response['label']));
+                    $sendyOrder->label_url = '/sendy/labels/label-' . $this->order->invoice_id . '.pdf';
+                    $sendyOrder->track_and_trace = $response['track_and_trace'];
+                    $sendyOrder->save();
 
                     $orderLog = new OrderLog();
                     $orderLog->order_id = $this->order->id;
                     $orderLog->user_id = Auth::user()->id;
-                    $orderLog->tag = 'order.pushed-to-keendelivery';
+                    $orderLog->tag = 'order.pushed-to-sendy';
                     $orderLog->save();
 
                     try {
-                        Mail::to($this->order->email)->send(new TrackandTraceMail($keendeliveryOrder));
+                        Mail::to($this->order->email)->send(new TrackandTraceMail($sendyOrder));
 
                         $orderLog = new OrderLog();
                         $orderLog->order_id = $this->order->id;
@@ -164,7 +164,7 @@ class ShowPushToKeendeliveryOrder extends Component implements HasForms, HasActi
 
                     $this->dispatch('refreshPage');
                     Notification::make()
-                        ->title('De bestelling wordt binnen enkele minuten naar KeenDelivery gepushed.')
+                        ->title('De bestelling wordt binnen enkele minuten naar Sendy gepushed.')
                         ->success()
                         ->send();
                 } else {

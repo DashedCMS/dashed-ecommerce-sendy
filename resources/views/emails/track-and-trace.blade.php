@@ -336,7 +336,7 @@
                                                                 style="font-family: Open Sans, Helvetica, Tahoma, Arial, sans-serif; font-size: 0px; padding: 0; word-break: break-word;">
                                                                 <div
                                                                     style="font-family: Open Sans, Helvetica, Tahoma, Arial, sans-serif; font-size: 26px; font-weight: bold; line-height: 30px; text-align: left; color: #4F4F4F;">
-                                                                    {{Translation::get('order-keendelivery-track-and-trace-email-title', 'keendelivery', 'Dear :name:', 'text', [
+                                                                    {{Translation::get('order-sendy-track-and-trace-email-title', 'sendy', 'Dear :name:', 'text', [
 'name' => $order->name
 ])}}
                                                                 </div>
@@ -348,7 +348,7 @@
                                                                 <div
                                                                     style="font-family: Open Sans, Helvetica, Tahoma, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 25px; text-align: left; color: #4F4F4F;">
                                                                     <br>
-                                                                    {!! Translation::get('order-keendelivery-track-and-trace-email-content', 'keendelivery', 'Your order has been picked. The following track and trace code(s) are available.', 'editor') !!}
+                                                                    {!! Translation::get('order-sendy-track-and-trace-email-content', 'sendy', 'Your order has been picked. The following track and trace code(s) are available.', 'editor') !!}
                                                                     <hr>
                                                                     @if($order->keen_delivery_track_and_trace)
                                                                         @foreach(json_decode($order->keen_delivery_track_and_trace, true) ?? [] as $key => $trackAndTrace)

@@ -1,17 +1,17 @@
 <?php
 
-namespace Dashed\DashedEcommerceKeendelivery\Classes;
+namespace Dashed\DashedEcommerceSendy\Classes;
 
 use Illuminate\Support\Str;
 use Dashed\DashedCore\Classes\Sites;
 use Illuminate\Support\Facades\Http;
 use Dashed\DashedCore\Models\Customsetting;
 use Dashed\DashedEcommerceCore\Models\Order;
-use Dashed\DashedEcommerceKeendelivery\Models\KeendeliveryShippingMethod;
-use Dashed\DashedEcommerceKeendelivery\Models\KeendeliveryShippingMethodService;
-use Dashed\DashedEcommerceKeendelivery\Models\KeendeliveryShippingMethodServiceOption;
+use Dashed\DashedEcommerceSendy\Models\SendyShippingMethod;
+use Dashed\DashedEcommerceSendy\Models\SendyShippingMethodService;
+use Dashed\DashedEcommerceSendy\Models\SendyShippingMethodServiceOption;
 
-class KeenDelivery
+class Sendy
 {
     public static function isConnected($siteId = null)
     {
@@ -42,7 +42,7 @@ class KeenDelivery
         $response = json_decode($response->body(), true);
 
         foreach ($response['shipping_methods'] as $keenShippingMethod) {
-            $shippingMethod = KeendeliveryShippingMethod::updateOrCreate(
+            $shippingMethod = SendyShippingMethod::updateOrCreate(
                 [
                     'value' => $keenShippingMethod['value'],
                     'site_id' => $siteId,
@@ -53,9 +53,9 @@ class KeenDelivery
             );
 
             foreach ($keenShippingMethod['services'] as $service) {
-                $shippingMethodService = KeendeliveryShippingMethodService::updateOrCreate(
+                $shippingMethodService = SendyShippingMethodService::updateOrCreate(
                     [
-                        'keendelivery_shipping_method_id' => $shippingMethod->id,
+                        'sendy_shipping_method_id' => $shippingMethod->id,
                         'value' => $service['value'],
                     ],
                     [
@@ -64,9 +64,9 @@ class KeenDelivery
                 );
 
                 foreach ($service['options'] as $option) {
-                    $shippingMethodServiceOption = KeendeliveryShippingMethodServiceOption::updateOrCreate(
+                    $shippingMethodServiceOption = SendyShippingMethodServiceOption::updateOrCreate(
                         [
-                            'keendelivery_shipping_method_service_id' => $shippingMethodService->id,
+                            'sendy_shipping_method_service_id' => $shippingMethodService->id,
                             'field' => $option['field'],
                             'name' => $option['text'],
                         ],

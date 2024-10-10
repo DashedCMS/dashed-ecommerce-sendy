@@ -27,13 +27,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Dashed\\DashedEcommerceKeendelivery\\": "src",
-            "Dashed\\DashedEcommerceKeendelivery\\Database\\Factories\\": "database/factories"
+            "Dashed\\DashedEcommerceSendy\\": "src",
+            "Dashed\\DashedEcommerceSendy\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Dashed\\DashedEcommerceKeendelivery\\Tests\\": "tests"
+            "Dashed\\DashedEcommerceSendy\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -50,10 +50,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Dashed\\DashedEcommerceKeendelivery\\DashedEcommerceKeendeliveryServiceProvider"
+                "Dashed\\DashedEcommerceSendy\\DashedEcommerceSendyServiceProvider"
             ],
             "aliases": {
-                "DashedEcommerceKeendelivery": "Dashed\\DashedEcommerceKeendelivery\\Facades\\DashedEcommerceKeendelivery"
+                "DashedEcommerceSendy": "Dashed\\DashedEcommerceSendy\\Facades\\DashedEcommerceSendy"
             }
         }
     },

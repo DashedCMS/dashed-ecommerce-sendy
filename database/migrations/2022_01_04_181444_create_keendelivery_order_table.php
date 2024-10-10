@@ -4,9 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Dashed\DashedEcommerceKeendelivery\Models\KeendeliveryOrder;
+use Dashed\DashedEcommerceSendy\Models\SendyOrder;
 
-class CreateKeendeliveryOrderTable extends Migration
+class CreateSendyOrderTable extends Migration
 {
     /**
      * Run the migrations.
@@ -29,7 +29,7 @@ class CreateKeendeliveryOrderTable extends Migration
         });
 
         foreach (\Dashed\DashedEcommerceCore\Models\Order::whereNotNull('keen_delivery_shipment_id')->get() as $order) {
-            $keendeliveryOrder = new KeendeliveryOrder();
+            $keendeliveryOrder = new SendyOrder();
             $keendeliveryOrder->order_id = $order->id;
             $keendeliveryOrder->shipment_id = $order->keen_delivery_shipment_id;
             $keendeliveryOrder->label = $order->keen_delivery_label;

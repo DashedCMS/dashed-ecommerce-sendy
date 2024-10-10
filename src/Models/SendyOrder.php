@@ -1,19 +1,19 @@
 <?php
 
-namespace Dashed\DashedEcommerceKeendelivery\Models;
+namespace Dashed\DashedEcommerceSendy\Models;
 
 use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Dashed\DashedEcommerceCore\Models\Order;
 
-class KeendeliveryOrder extends Model
+class SendyOrder extends Model
 {
     use LogsActivity;
 
     protected static $logFillable = true;
 
-    protected $table = 'dashed__order_keendelivery';
+    protected $table = 'dashed__order_sendy';
 
     protected $fillable = [
         'order_id',

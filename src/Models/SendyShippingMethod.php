@@ -1,18 +1,18 @@
 <?php
 
-namespace Dashed\DashedEcommerceKeendelivery\Models;
+namespace Dashed\DashedEcommerceSendy\Models;
 
 use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class KeendeliveryShippingMethod extends Model
+class SendyShippingMethod extends Model
 {
     use LogsActivity;
 
     protected static $logFillable = true;
 
-    protected $table = 'dashed__keendelivery_shipping_methods';
+    protected $table = 'dashed__sendy_shipping_methods';
 
     protected $fillable = [
         'name',
@@ -30,8 +30,8 @@ class KeendeliveryShippingMethod extends Model
         return LogOptions::defaults();
     }
 
-    public function KeendeliveryShippingMethodServices()
+    public function SendyShippingMethodServices()
     {
-        return $this->hasMany(KeendeliveryShippingMethodService::class);
+        return $this->hasMany(SendyShippingMethodService::class);
     }
 }
