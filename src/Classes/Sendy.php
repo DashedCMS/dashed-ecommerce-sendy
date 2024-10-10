@@ -2,7 +2,6 @@
 
 namespace Dashed\DashedEcommerceSendy\Classes;
 
-use Illuminate\Support\Str;
 use Dashed\DashedCore\Classes\Sites;
 use Illuminate\Support\Facades\Http;
 use Dashed\DashedCore\Models\Customsetting;
