@@ -116,8 +116,8 @@ class Sendy
         ];
 
         foreach ($formData as $key => $value) {
-            if (Str::contains($key, 'shipping_method_service_option_') && $value) {
-                $data[str_replace('shipping_method_service_option_', '', $key)] = $value;
+            if (str($key)->contains('shipping_method_service_') && str($key)->contains('_option_') && $value) {
+                $data[str($key)->explode('_')->last()] = $value;
             }
         }
 

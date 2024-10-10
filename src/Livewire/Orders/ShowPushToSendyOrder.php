@@ -54,7 +54,7 @@ class ShowPushToSendyOrder extends Component implements HasForms, HasActions
                     $services = $shippingMethod->sendyShippingMethodServices()->where('enabled', 1)->get();
                     foreach ($services as $service) {
                         foreach ($service->sendyShippingMethodServiceOptions as $option) {
-                            $data["shipping_method_service_option_$option->field"] = $option->default ?: null;
+                            $data["shipping_method_service_{$service->id}_option_$option->field"] = $option->default ?: null;
                         }
                     }
                 }
@@ -83,18 +83,18 @@ class ShowPushToSendyOrder extends Component implements HasForms, HasActions
                     foreach ($services as $service) {
                         foreach ($service->sendyShippingMethodServiceOptions as $option) {
                             if ($option->type == 'textbox') {
-                                $schema[] = TextInput::make("shipping_method_service_option_{$option->field}")
+                                $schema[] = TextInput::make("shipping_method_service_{$service->id}_option_{$option->field}")
                                     ->label($option->name)
                                     ->maxLength(255)
                                     ->required($option->mandatory)
                                     ->hidden(fn (Get $get) => $get("service") != $service->value);
                             } elseif ($option->type == 'checkbox') {
-                                $schema[] = Toggle::make("shipping_method_service_option_{$option->field}")
+                                $schema[] = Toggle::make("shipping_method_service_{$service->id}_option_{$option->field}")
                                     ->label($option->name)
                                     ->required($option->mandatory)
                                     ->hidden(fn (Get $get) => $get("service") != $service->value);
                             } elseif ($option->type == 'email') {
-                                $schema[] = TextInput::make("shipping_method_service_option_{$option->field}")
+                                $schema[] = TextInput::make("shipping_method_service_{$service->id}_option_{$option->field}")
                                     ->type('email')
                                     ->label($option->name)
                                     ->required($option->mandatory)
@@ -102,7 +102,7 @@ class ShowPushToSendyOrder extends Component implements HasForms, HasActions
                                     ->maxLength(255)
                                     ->hidden(fn (Get $get) => $get("service") != $service->value);
                             } elseif ($option->type == 'date') {
-                                $schema[] = DatePicker::make("shipping_method_service_option_{$option->field}")
+                                $schema[] = DatePicker::make("shipping_method_service_{$service->id}_option_{$option->field}")
                                     ->label($option->name)
                                     ->required($option->mandatory)
                                     ->hidden(fn (Get $get) => $get("service") != $service->value);
@@ -111,7 +111,7 @@ class ShowPushToSendyOrder extends Component implements HasForms, HasActions
                                 foreach ($option->choices as $choice) {
                                     $choices[$choice['value']] = $choice['text'];
                                 }
-                                $schema[] = Select::make("shipping_method_service_option_{$option->field}")
+                                $schema[] = Select::make("shipping_method_service_{$service->id}_option_{$option->field}")
                                     ->label($option->name)
                                     ->options($choices)
                                     ->required($option->mandatory)
