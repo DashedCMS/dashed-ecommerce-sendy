@@ -18,7 +18,7 @@ class Sendy
             $siteId = Sites::getActive();
         }
 
-        $response = Http::get('https://portal.keendelivery.com/api/v2/authorization?api_token=' . Customsetting::get('keen_delivery_api_key', $siteId));
+        $response = Http::get('https://portal.keendelivery.com/api/v2/authorization?api_token=' . Customsetting::get('sendy_api_key', $siteId));
         $response = json_decode($response->body(), true);
         if (isset($response['authorized']) && $response['authorized']) {
             return true;
@@ -37,7 +37,7 @@ class Sendy
             return;
         }
 
-        $response = Http::get('https://portal.keendelivery.com/api/v2/shipping_methods?api_token=' . Customsetting::get('keen_delivery_api_key', $siteId));
+        $response = Http::get('https://portal.keendelivery.com/api/v2/shipping_methods?api_token=' . Customsetting::get('sendy_api_key', $siteId));
         $response = json_decode($response->body(), true);
 
         foreach ($response['shipping_methods'] as $keenShippingMethod) {
@@ -123,7 +123,7 @@ class Sendy
         $response = Http::withHeaders([
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
-        ])->post('https://portal.keendelivery.com/api/v2/shipment?api_token=' . Customsetting::get('keen_delivery_api_key'), $data);
+        ])->post('https://portal.keendelivery.com/api/v2/shipment?api_token=' . Customsetting::get('sendy_api_key'), $data);
         $response = json_decode($response->body(), true);
 
         return $response;
@@ -135,7 +135,7 @@ class Sendy
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
         ])
-            ->post('https://portal.keendelivery.com/api/v2/label?api_token=' . Customsetting::get('keen_delivery_api_key'), [
+            ->post('https://portal.keendelivery.com/api/v2/label?api_token=' . Customsetting::get('sendy_api_key'), [
                 'shipments' => $shipmentIds,
             ])
             ->json();
