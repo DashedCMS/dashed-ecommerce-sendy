@@ -4,8 +4,8 @@ namespace Dashed\DashedEcommerceSendy\Controllers;
 
 use Illuminate\Support\Facades\Storage;
 use Dashed\DashedEcommerceSendy\Classes\Sendy;
-use Dashed\DashedCore\Controllers\Frontend\FrontendController;
 use Dashed\DashedEcommerceSendy\Models\SendyOrder;
+use Dashed\DashedCore\Controllers\Frontend\FrontendController;
 
 class SendyController extends FrontendController
 {
