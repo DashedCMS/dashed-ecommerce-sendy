@@ -48,7 +48,7 @@ class DashedEcommerceSendyServiceProvider extends PackageServiceProvider
         $package
             ->name('dashed-ecommerce-sendy')
             ->hasRoutes([
-                'sendyRoutes',
+                'SendyRoutes',
             ])
             ->hasViews();
 
