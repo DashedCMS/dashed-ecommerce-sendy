@@ -2,7 +2,6 @@
 
 namespace Dashed\DashedEcommerceSendy;
 
-use Dashed\DashedCore\DashedCorePlugin;
 use Livewire\Livewire;
 use Filament\Actions\Action;
 use Spatie\LaravelPackageTools\Package;
