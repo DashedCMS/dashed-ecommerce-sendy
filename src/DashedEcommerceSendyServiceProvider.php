@@ -52,17 +52,7 @@ class DashedEcommerceSendyServiceProvider extends PackageServiceProvider
             ])
             ->hasViews();
 
-        cms()->builder(
-            'settingPages',
-            array_merge(cms()->builder('settingPages'), [
-                'sendy' => [
-                    'name' => 'Sendy',
-                    'description' => 'Koppel Sendy',
-                    'icon' => 'archive-box',
-                    'page' => SendySettingsPage::class,
-                ],
-            ])
-        );
+        cms()->registerSettingsPage(SendySettingsPage::class, 'Sendy', 'archive-box', 'Koppel Sendy');
 
         ecommerce()->widgets(
             'orders',
