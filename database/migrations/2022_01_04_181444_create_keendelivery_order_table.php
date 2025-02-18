@@ -6,7 +6,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Dashed\DashedEcommerceSendy\Models\SendyOrder;
 
-class CreateSendyOrderTable extends Migration
+class CreateKeendeliveryOrderTable extends Migration
 {
     /**
      * Run the migrations.
