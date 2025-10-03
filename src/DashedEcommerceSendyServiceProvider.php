@@ -25,19 +25,17 @@ class DashedEcommerceSendyServiceProvider extends PackageServiceProvider
             return $model->hasMany(SendyOrder::class);
         });
 
-        if (! app()->runningInConsole()) {
-            if (SendyOrder::where('label_printed', 0)->count()) {
-                ecommerce()->buttonActions(
-                    'orders',
-                    array_merge(ecommerce()->buttonActions('orders'), [
-                        Action::make('downloadSendyLabels')
-                            ->button()
-                            ->label('Download Sendy Labels')
-                            ->url(url(config('filament.path', 'dashed') . '/sendy/download-labels'))
-                            ->openUrlInNewTab(),
-                    ])
-                );
-            }
+        if (cms()->isCMSRoute() && SendyOrder::where('label_printed', 0)->count()) {
+            ecommerce()->buttonActions(
+                'orders',
+                array_merge(ecommerce()->buttonActions('orders'), [
+                    Action::make('downloadSendyLabels')
+                        ->button()
+                        ->label('Download Sendy Labels')
+                        ->url(url(config('filament.path', 'dashed') . '/sendy/download-labels'))
+                        ->openUrlInNewTab(),
+                ])
+            );
         }
     }
 
