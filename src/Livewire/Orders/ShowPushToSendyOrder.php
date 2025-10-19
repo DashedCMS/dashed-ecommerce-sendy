@@ -2,31 +2,31 @@
 
 namespace Dashed\DashedEcommerceSendy\Livewire\Orders;
 
-use Filament\Forms\Get;
 use Livewire\Component;
 use Filament\Actions\Action;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Contracts\HasForms;
 use Illuminate\Support\Facades\Storage;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Forms\Components\DatePicker;
 use Filament\Actions\Contracts\HasActions;
+use Filament\Schemas\Contracts\HasSchemas;
 use Dashed\DashedEcommerceCore\Models\Order;
 use Dashed\DashedEcommerceSendy\Classes\Sendy;
+use Filament\Schemas\Components\Utilities\Get;
 use Dashed\DashedEcommerceCore\Models\OrderLog;
-use Filament\Forms\Concerns\InteractsWithForms;
 use Dashed\DashedEcommerceSendy\Models\SendyOrder;
 use Filament\Actions\Concerns\InteractsWithActions;
+use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Dashed\DashedEcommerceSendy\Mail\TrackandTraceMail;
 use Dashed\DashedEcommerceSendy\Models\SendyShippingMethod;
 
-class ShowPushToSendyOrder extends Component implements HasForms, HasActions
+class ShowPushToSendyOrder extends Component implements HasSchemas, HasActions
 {
-    use InteractsWithForms;
+    use InteractsWithSchemas;
     use InteractsWithActions;
 
     public Order $order;
@@ -61,7 +61,7 @@ class ShowPushToSendyOrder extends Component implements HasForms, HasActions
 
                 return $data;
             })
-            ->form(function () {
+            ->schema(function () {
                 $shippingMethods = SendyShippingMethod::where('enabled', 1)->where('site_id', $this->order->site_id)->get();
 
                 $schema = [];

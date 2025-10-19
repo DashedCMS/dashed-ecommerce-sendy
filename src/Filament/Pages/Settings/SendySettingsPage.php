@@ -3,18 +3,19 @@
 namespace Dashed\DashedEcommerceSendy\Filament\Pages\Settings;
 
 use Filament\Pages\Page;
+use Filament\Schemas\Schema;
 use Filament\Forms\Components\Card;
-use Filament\Forms\Components\Tabs;
 use Dashed\DashedCore\Classes\Sites;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Tabs\Tab;
+use Filament\Schemas\Components\Tabs;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
+use Filament\Schemas\Components\Section;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Placeholder;
+use Filament\Schemas\Components\Tabs\Tab;
 use Dashed\DashedCore\Models\Customsetting;
+use Filament\Infolists\Components\TextEntry;
 use Dashed\DashedEcommerceSendy\Classes\Sendy;
 use Dashed\DashedEcommerceSendy\Models\SendyShippingMethod;
 
@@ -23,7 +24,7 @@ class SendySettingsPage extends Page
     protected static bool $shouldRegisterNavigation = false;
     protected static ?string $title = 'Sendy';
 
-    protected static string $view = 'dashed-core::settings.pages.default-settings';
+    protected string $view = 'dashed-core::settings.pages.default-settings';
     public array $data = [];
 
     public function mount(): void
@@ -47,24 +48,22 @@ class SendySettingsPage extends Page
         $this->form->fill($formData);
     }
 
-    protected function getFormSchema(): array
+    public function form(Schema $schema): Schema
     {
         $sites = Sites::getSites();
         $tabGroups = [];
 
         $tabs = [];
         foreach ($sites as $site) {
-            $schema = [
-                Placeholder::make('label')
-                    ->label("Sendy voor {$site['name']}")
-                    ->content('Activeer Sendy.')
+            $newSchema = [
+                TextEntry::make("Sendy voor {$site['name']}")
+                    ->state('Activeer Sendy.')
                     ->columnSpan([
                         'default' => 1,
                         'lg' => 2,
                     ]),
-                Placeholder::make('label')
-                    ->label("Sendy is " . (! Customsetting::get('sendy_connected', $site['id'], 0) ? 'niet' : '') . ' geconnect')
-                    ->content(Customsetting::get('sendy_connection_error', $site['id'], ''))
+                TextEntry::make("Sendy is " . (! Customsetting::get('sendy_connected', $site['id'], 0) ? 'niet' : '') . ' geconnect')
+                    ->state(Customsetting::get('sendy_connection_error', $site['id'], ''))
                     ->columnSpan([
                         'default' => 1,
                         'lg' => 2,
@@ -79,7 +78,7 @@ class SendySettingsPage extends Page
             ];
 
             foreach (SendyShippingMethod::get() as $shippingMethod) {
-                $schema[] = Toggle::make("shipping_method_{$shippingMethod->id}_enabled")
+                $newSchema[] = Toggle::make("shipping_method_{$shippingMethod->id}_enabled")
                     ->label("Verzendmethod {$shippingMethod->name} activeren")
                     ->reactive();
             }
@@ -126,7 +125,7 @@ class SendySettingsPage extends Page
                         ->schema($optionsSchema)
                         ->hidden(fn ($get) => ! $get("shipping_method_service_{$service->id}_enabled"));
 
-                    $schema[] = Section::make($service->name)
+                    $schema[] = Section::make($service->name)->columnSpanFull()
                         ->label($service->name)
                         ->schema($serviceSchema)
                         ->hidden(fn ($get) => ! $get("shipping_method_{$shippingMethod->id}_enabled"));
@@ -135,7 +134,7 @@ class SendySettingsPage extends Page
 
             $tabs[] = Tab::make($site['id'])
                 ->label(ucfirst($site['name']))
-                ->schema($schema)
+                ->schema($newSchema)
                 ->columns([
                     'default' => 1,
                     'lg' => 2,
@@ -144,12 +143,8 @@ class SendySettingsPage extends Page
         $tabGroups[] = Tabs::make('Sites')
             ->tabs($tabs);
 
-        return $tabGroups;
-    }
-
-    public function getFormStatePath(): ?string
-    {
-        return 'data';
+        return $schema->schema($tabGroups)
+            ->statePath('data');
     }
 
     public function submit()
