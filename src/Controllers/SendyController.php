@@ -2,12 +2,14 @@
 
 namespace Dashed\DashedEcommerceSendy\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Dashed\DashedEcommerceSendy\Classes\Sendy;
 use Dashed\DashedEcommerceSendy\Models\SendyOrder;
-use Dashed\DashedCore\Controllers\Frontend\FrontendController;
 
-class SendyController extends FrontendController
+;
+
+class SendyController extends Controller
 {
     public function downloadLabels()
     {
