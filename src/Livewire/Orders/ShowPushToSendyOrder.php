@@ -134,7 +134,7 @@ class ShowPushToSendyOrder extends Component implements HasSchemas, HasActions
                     $sendyOrder->order_id = $this->order->id;
                     $sendyOrder->shipment_id = $response['shipment_id'];
                     $sendyOrder->label = $response['label'];
-                    $time = uniqid();
+                    $time = \Illuminate\Support\Str::random(40);
                     Storage::disk('public')->put('/dashed/orders/sendy/labels/label-' . $this->order->invoice_id . '-' . $time . '.pdf', base64_decode($response['label']));
                     $sendyOrder->label_url = '/sendy/labels/label-' . $this->order->invoice_id . '-' . $time . '.pdf';
                     $sendyOrder->track_and_trace = $response['track_and_trace'];
