@@ -72,7 +72,7 @@ class SendySettingsPage extends Page
                         'lg' => 2,
                     ]),
                 TextInput::make("sendy_api_key_{$site['id']}")
-                    ->label('Sendy API key')
+                    ->label(__('Sendy API key'))
                     ->maxLength(255)
                     ->columnSpan([
                         'default' => 1,
@@ -82,7 +82,7 @@ class SendySettingsPage extends Page
 
             foreach (SendyShippingMethod::get() as $shippingMethod) {
                 $newSchema[] = Toggle::make("shipping_method_{$shippingMethod->id}_enabled")
-                    ->label("Verzendmethod {$shippingMethod->name} activeren")
+                    ->label(__('Verzendmethod :naam activeren', ['naam' => $shippingMethod->name]))
                     ->reactive();
             }
 
@@ -185,7 +185,7 @@ class SendySettingsPage extends Page
         }
 
         Notification::make()
-            ->title('De Sendy instellingen zijn opgeslagen')
+            ->title(__('De Sendy instellingen zijn opgeslagen'))
             ->success()
             ->send();
 

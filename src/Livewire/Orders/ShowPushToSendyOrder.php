@@ -44,7 +44,7 @@ class ShowPushToSendyOrder extends Component implements HasSchemas, HasActions
     public function action(): Action
     {
         return Action::make('action')
-            ->label('Verstuur naar Sendy')
+            ->label(__('Verstuur naar Sendy'))
             ->color('primary')
             ->fillForm(function () {
                 $data = [];
@@ -66,7 +66,7 @@ class ShowPushToSendyOrder extends Component implements HasSchemas, HasActions
 
                 $schema = [];
                 $schema[] = Select::make('shipping_method')
-                    ->label('Kies een verzendmethode')
+                    ->label(__('Kies een verzendmethode'))
                     ->required()
                     ->reactive()
                     ->options($shippingMethods->pluck('name', 'value'));
@@ -74,7 +74,7 @@ class ShowPushToSendyOrder extends Component implements HasSchemas, HasActions
                 foreach ($shippingMethods as $shippingMethod) {
                     $services = $shippingMethod->sendyShippingMethodServices()->where('enabled', 1)->get();
                     $schema[] = Select::make('service')
-                        ->label('Kies een service')
+                        ->label(__('Kies een service'))
                         ->required()
                         ->reactive()
                         ->options($services->pluck('name', 'value'))
@@ -169,7 +169,7 @@ class ShowPushToSendyOrder extends Component implements HasSchemas, HasActions
 
                     $this->dispatch('refreshPage');
                     Notification::make()
-                        ->title('De bestelling is naar Sendy gepushed.')
+                        ->title(__('De bestelling is naar Sendy gepushed.'))
                         ->success()
                         ->send();
                 } else {

@@ -31,7 +31,7 @@ class DashedEcommerceSendyServiceProvider extends PackageServiceProvider
                 array_merge(ecommerce()->buttonActions('orders'), [
                     Action::make('downloadSendyLabels')
                         ->button()
-                        ->label('Download Sendy Labels')
+                        ->label(__('Download Sendy Labels'))
                         ->url(url(config('filament.path', 'dashed') . '/sendy/download-labels'))
                         ->openUrlInNewTab(),
                 ])
