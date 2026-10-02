@@ -1,1 +1,12 @@
-{}
+{
+    "De bestelling is naar Sendy gepushed.": "The order has been pushed to Sendy.",
+    "De Sendy instellingen zijn opgeslagen": "The Sendy settings have been saved",
+    "Download Sendy Labels": "Download Sendy Labels",
+    "Kies een service": "Choose a service",
+    "Kies een verzendmethode": "Choose a shipping method",
+    "Koppel Sendy": "Connect Sendy",
+    "Sendy": "Sendy",
+    "Sendy API key": "Sendy API key",
+    "Verstuur naar Sendy": "Send to Sendy",
+    "Verzendmethod :naam activeren": "Activate shipping method :naam"
+}
