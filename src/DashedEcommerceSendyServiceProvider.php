@@ -84,6 +84,7 @@ MARKDOWN,
 
         $package
             ->name('dashed-ecommerce-sendy')
+            ->hasTranslations()
             ->hasRoutes([
                 'SendyRoutes',
             ])
